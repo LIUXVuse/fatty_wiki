@@ -21,7 +21,7 @@ BASE         = Path(__file__).parent.parent
 CONCEPTS_DIR = BASE / "Wiki" / "概念"
 SOURCES_DIR  = BASE / "Wiki" / "來源"
 OLLAMA_URL   = "http://localhost:11434/api/generate"
-MODEL        = "gemma4"
+MODEL        = "gemma3:27b"
 
 # ── 輔助：讀概念頁，提取「## 出現集數」裡的來源名稱 ────────────────────────
 def extract_sources(text: str) -> list[str]:

@@ -26,7 +26,7 @@ BASE       = Path(__file__).parent.parent
 PLACES_DIR = BASE / "Wiki" / "地點"
 SOURCES_DIR = BASE / "Wiki" / "來源"
 OLLAMA_URL = "http://localhost:11434/api/generate"
-MODEL      = "gemma4"
+MODEL      = "gemma3:27b"
 
 PLACEHOLDER = "（待補充）"
 

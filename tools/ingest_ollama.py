@@ -4,13 +4,13 @@ MyWiki Ollama 批量處理腳本
 
 功能：
   掃描 Raw/ 下所有子資料夾（排除 claude/ 和 processed/）
-  → 呼叫 Ollama (gemma4) 整理成 Wiki Source 頁
+  → 呼叫 Ollama (gemma3:27b) 整理成 Wiki Source 頁
   → 存到 Wiki/Sources/
   → 把原檔移到 Raw/processed/<子資料夾>/
 
 需求：
   pip install requests
-  Ollama 在 localhost:11434 跑著，有 gemma4 模型
+  Ollama 在 localhost:11434 跑著，有 gemma3:27b 模型
 """
 
 import sys
@@ -34,10 +34,10 @@ OUT_DIR = BASE / "Wiki" / "來源"
 # 排除這些子資料夾（不讓 Ollama 處理）
 EXCLUDE_FOLDERS = {"processed", "claude"}
 OLLAMA_URL = "http://localhost:11434/api/generate"
-MODEL = "gemma4"
+MODEL = "gemma3:27b"
 TODAY = date.today().isoformat()
 
-# gemma4 有 1M context，完整逐字稿直接塞進去
+# gemma3:27b 有 1M context，完整逐字稿直接塞進去
 MAX_CHARS = 0  # 0 = 不截斷
 
 # 開頭固定廣播詞（這些行出現就跳過，不算內容）

@@ -43,7 +43,7 @@ SOURCES    = BASE / "Wiki" / "來源"
 PEOPLE     = BASE / "Wiki" / "人物"
 PROCESSED  = BASE / "Raw" / "processed"
 OLLAMA_URL = "http://localhost:11434/api/generate"
-MODEL      = "gemma4"
+MODEL      = "gemma3:27b"
 
 
 def wait_for_gpu_idle(threshold_mb=5000, poll_sec=30):
