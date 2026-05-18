@@ -36,6 +36,7 @@ MyWiki/
 │   ├── enrich_concepts.py       ← Step3：術語 → 概念/；店家 → 店家/；地點 → 地點/
 │   ├── enrich_places.py         ← Step4：補地點 ## 特色（待補充 → Ollama 生成）
 │   ├── merge_aliases.py         ← Step5：合併別名、修正連結
+│   ├── update_index.py          ← Step7：自動生成 Wiki/索引.md（含連結驗證）
 │   ├── enrich_concept_defs.py   ← 選用：更新概念定義（累積多集後跑）
 │   ├── migrate_to_chinese_dirs.py ← 一次性遷移腳本（已執行，保留備用）
 │   └── check_links.py           ← 連結品質驗證（選用）
@@ -97,7 +98,10 @@ python -X utf8 tools/merge_aliases.py
 - 為每個檔案建立 `Wiki/來源/` 頁面，提取 Concepts 和 Entities
 
 **Step 7 — 更新索引和 Log**
-- 更新 `Wiki/索引.md`（統計數字、目錄）
+```bash
+python -X utf8 tools/update_index.py
+```
+- 自動從檔案系統計算真實數字，驗證代表性連結，輸出 `Wiki/索引.md`
 - 在 `Wiki/Log.md` 記錄這次處理了什麼
 
 ---
@@ -143,7 +147,9 @@ python -X utf8 tools/merge_aliases.py
 ```
 
 **Step 6 — 更新索引和 Log**
-- 更新 `Wiki/索引.md`（統計數字）
+```bash
+python -X utf8 tools/update_index.py
+```
 - 在 `Wiki/Log.md` 記錄補救完成
 
 ---
@@ -160,14 +166,14 @@ python -X utf8 tools/merge_aliases.py
    - 提取重要概念 → 新增或更新 `Wiki/概念/` 頁面
    - 提取人物、組織、產品 → 新增或更新 `Wiki/人物/ 或 Wiki/店家/ 或 Wiki/地點/` 頁面
    - 在各頁面之間建立 `[[雙向連結]]`
-3. 更新 `Wiki/索引.md`
+3. 執行 `python -X utf8 tools/update_index.py` 更新索引
 4. 在 `Wiki/Log.md` 記錄這次處理了什麼
 5. 把處理完的原始文件移到 `Raw/processed/`（沒有就建立）
 
 ### 指令：`ask`（回答問題）
 當用戶問任何問題時：
 
-1. 先讀 `Wiki/索引.md` 確認相關頁面在哪裡
+1. 先讀 `Wiki/索引.md` 確認相關頁面在哪裡（由 `update_index.py` 自動維護，數字可信）
 2. 讀相關的 Concepts / Entities / Sources 頁面
 3. 綜合多篇來源回答，並標註「根據 [[頁面名稱]]」
 4. 如果發現知識不足，主動說明缺口在哪
