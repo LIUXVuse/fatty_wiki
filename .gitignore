@@ -1,0 +1,22 @@
+# 原始資料（個人逐字稿，不公開）
+Raw/
+
+# 內部備忘（不公開）
+HANDOVER.md
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyc
+.venv/
+venv/
+*.egg-info/
+
+# 系統
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# 編輯器
+.vscode/
+*.swp

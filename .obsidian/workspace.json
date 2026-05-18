@@ -1,0 +1,228 @@
+{
+  "main": {
+    "id": "ff77fb9eddda1a66",
+    "type": "split",
+    "children": [
+      {
+        "id": "63fd10158b819792",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "f5972a3bc8dd2913",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Wiki/索引.md",
+                "mode": "preview",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "索引"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "d3d25bf490457d3f",
+    "type": "split",
+    "children": [
+      {
+        "id": "e9f44f3a215310f0",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "afe508cb7288702b",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "檔案瀏覽器"
+            }
+          },
+          {
+            "id": "c8e1afe247f10a2c",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "搜尋"
+            }
+          },
+          {
+            "id": "e2cf6853af02223f",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "書籤"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 241.5
+  },
+  "right": {
+    "id": "6c42056c421ee72a",
+    "type": "split",
+    "children": [
+      {
+        "id": "8f3167e12f70e457",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "5bd7e3f19ead0af5",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "Wiki/Sources/肥宅老司機-S3EP197.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "肥宅老司機-S3EP197 的反向連結"
+            }
+          },
+          {
+            "id": "20d82e0d226c4137",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "Wiki/Sources/肥宅老司機-S3EP197.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "肥宅老司機-S3EP197 的對外連結"
+            }
+          },
+          {
+            "id": "d95cbb8cf8eba9ce",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "標籤"
+            }
+          },
+          {
+            "id": "2662b755c3e2668d",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "所有屬性"
+            }
+          },
+          {
+            "id": "3c4c0c7ab3b94793",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "Wiki/Sources/肥宅老司機-S3EP197.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "肥宅老司機-S3EP197 的大綱"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:開啟快速切換": false,
+      "graph:查看關聯圖": false,
+      "canvas:建立新畫布": false,
+      "daily-notes:開啟今天的每日筆記": false,
+      "templates:插入模板": false,
+      "command-palette:開啟命令面板": false,
+      "bases:建立新的 base": false,
+      "workspaces:管理工作區配置": false,
+      "markdown-importer:開啟 Markdown 格式轉換器": false
+    }
+  },
+  "active": "f5972a3bc8dd2913",
+  "lastOpenFiles": [
+    "Wiki/Index.md",
+    "CLAUDE.md.tmp.66356.1779123900836",
+    "Wiki/索引.md",
+    "README.md",
+    "HANDOVER.md",
+    "CLAUDE.md",
+    "Wiki/概念/94_97.md",
+    "Wiki/概念/420友善.md",
+    "Wiki/概念/小芝麻.md",
+    "Wiki/概念/仙人指路.md",
+    "Wiki/概念/正波與震波.md",
+    "Wiki/概念/尬聊.md",
+    "Wiki/概念/兩王.md",
+    "Wiki/概念/前列腺高潮.md",
+    "Wiki/概念/蛇媒.md",
+    "Wiki/概念/國模.md",
+    "Wiki/概念/站拼.md",
+    "Wiki/概念/神經病.md",
+    "Wiki/概念/個工.md",
+    "Wiki/概念/唐文.md",
+    "Wiki/概念/按龍經.md",
+    "Wiki/概念/花街.md",
+    "Wiki/概念/金魚店.md",
+    "Wiki/概念/武場.md",
+    "Wiki/概念/服務派.md",
+    "Wiki/概念/拋街球.md",
+    "Wiki/概念/防費.md",
+    "HANDOVER.md.tmp.66356.1779123032639",
+    "tools/__pycache__/merge_aliases.cpython-313.pyc",
+    "tools/enrich_concepts.py.tmp.66356.1779112205106",
+    "Wiki/概念/牛郎]]",
+    "Wiki/概念/青蛙抬腿]]",
+    "Wiki/概念/0.3]]",
+    "Wiki/概念/0.5",
+    "Wiki/概念/1-3-5",
+    "Wiki/概念/S T",
+    "未命名.canvas"
+  ]
+}
