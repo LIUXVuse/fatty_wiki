@@ -54,4 +54,6 @@ fatty_wiki/
 - Python 3.x + venv
 - Ollama（本機 GPU，處理逐字稿用）
 - Obsidian（免費，在 obsidian.md 下載，用來看知識圖譜）
-![[肥宅老司機知識圖譜.png]]
+## 知識圖譜
+
+![知識圖譜](%E8%82%A5%E5%AE%85%E8%80%81%E5%8F%B8%E6%A9%9F%E7%9F%A5%E8%AD%98%E5%9C%96%E8%AD%9C.png)
