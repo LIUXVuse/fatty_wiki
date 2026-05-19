@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Wiki/索引.md",
+                "file": "Wiki/來源/肥宅老司機-地點索引.md",
                 "mode": "preview",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "索引"
+              "title": "肥宅老司機-地點索引"
             }
           }
         ]
@@ -187,6 +187,16 @@
   },
   "active": "f5972a3bc8dd2913",
   "lastOpenFiles": [
+    "tools/generate_category_indexes.py.tmp.66356.1779213539198",
+    "Wiki/地點/溫哥華.md",
+    "Wiki/來源/肥宅老司機-地點索引.md",
+    "加拿大.md",
+    "tools/generate_category_indexes.py.tmp.66356.1779213459164",
+    "tools/generate_category_indexes.py.tmp.66356.1779213449673",
+    "Wiki/索引.md",
+    "Wiki/來源/肥宅老司機-人物索引.md",
+    "Wiki/來源/肥宅老司機-概念索引.md",
+    "Wiki/來源/肥宅老司機-店家索引.md",
     "HANDOVER.md.tmp.66356.1779213120982",
     "HANDOVER.md.tmp.66356.1779213109640",
     "Wiki/地點/BGC.md.tmp.66356.1779213088602",
@@ -195,7 +205,6 @@
     "Wiki/地點/上海.md.tmp.66356.1779213013039",
     "Wiki/地點/拉斯維加斯.md.tmp.66356.1779212996711",
     "Wiki/地點/胡志明.md",
-    "Wiki/索引.md",
     "Wiki/地點/河內.md",
     "Wiki/地點/曼谷.md",
     "Wiki/概念/GoGo Bar.md",
@@ -213,16 +222,7 @@
     "Wiki/地點/上野.md",
     "Wiki/地點/大直.md",
     "Wiki/地點/大統領.md",
-    "Wiki/地點/中山.md",
-    "Wiki/地點/中和.md",
-    "Wiki/地點/中青路.md",
-    "Wiki/地點/高雄.md",
     "HANDOVER.md.tmp.66356.1779212729108",
-    "HANDOVER.md.tmp.66356.1779212703847",
-    "Wiki/地點/基隆.md",
-    "Wiki/地點/馬來西亞.md",
-    "Wiki/地點/法蘭克福.md.tmp.66356.1779212623922",
-    "Wiki/地點/西門町.md.tmp.66356.1779212600056",
     "肥宅老司機知識圖譜.png",
     "肥宅老司機知識圖譜 1.png",
     "肥宅老司機知識圖譜 2.png",

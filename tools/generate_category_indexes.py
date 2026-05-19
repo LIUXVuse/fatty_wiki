@@ -57,6 +57,7 @@ def generate_people():
     for f in files:
         text = f.read_text(encoding="utf-8")
         kind = read_field(text, "類型") or "其他"
+        kind = re.sub(r'\[\[([^\]|]+)(?:\|[^\]]+)?\]\]', r'\1', kind).strip()
         alias = read_field(text, "別名")
         note = first_section_line(text, "觀點累積") or first_section_line(text, "簡介") or ""
         groups[kind].append((f.stem, alias, note))
@@ -111,6 +112,8 @@ def generate_places():
     for f in files:
         text = f.read_text(encoding="utf-8")
         country = read_field(text, "國家") or read_field(text, "地區") or "其他"
+        # 去掉 [[...]] wiki 連結符號，避免 [[泰國]] 和 泰國 被視為不同分組
+        country = re.sub(r'\[\[([^\]|]+)(?:\|[^\]]+)?\]\]', r'\1', country).strip()
         feat = first_section_line(text, "特色") or ""
         groups[country].append((f.stem, feat))
 
@@ -158,6 +161,7 @@ def generate_shops():
     for f in files:
         text = f.read_text(encoding="utf-8")
         location = read_field(text, "地點") or "未知地點"
+        location = re.sub(r'\[\[([^\]|]+)(?:\|[^\]]+)?\]\]', r'\1', location).strip()
         svc = read_field(text, "服務類型") or ""
         note = first_section_line(text, "評價與特色") or first_section_line(text, "費用") or ""
         groups[location].append((f.stem, svc, note))
@@ -206,6 +210,7 @@ def generate_concepts():
     for f in files:
         text = f.read_text(encoding="utf-8")
         kind = read_field(text, "類型") or "其他"
+        kind = re.sub(r'\[\[([^\]|]+)(?:\|[^\]]+)?\]\]', r'\1', kind).strip()
         defn = first_section_line(text, "定義") or ""
         groups[kind].append((f.stem, defn))
 
