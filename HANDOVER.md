@@ -48,6 +48,25 @@
 
 ---
 
+## ✅ 本次完成（2026-05-19）
+
+### sync_episode_refs.py — 全庫 Entity 出現集數補漏
+
+**根本原因**：`enrich_concepts.py` 以 Ollama 提取 entity，
+若 Ollama 寫 `[[雅加達]]` 而非 `[[印尼]]`，國家頁就不會收到那集。
+另外 `concepts_processed.json` 緩存讓已處理集數不再重跑。
+
+**新腳本 `tools/sync_episode_refs.py`**：
+- 反向掃描：從來源頁的 `[[連結]]` 建立 entity → 來源頁反向索引
+- 補漏：對地點/人物/店家/概念頁，補上缺漏的「出現集數」
+- 階層傳遞：城市集數傳到上層國家（依地點頁 `**國家**` 欄位）
+- 修正：163 個頁面，補入 1099 筆集數（含 印尼.md 收到 EP263）
+
+**CLAUDE.md SOP 更新**：Step 5.5 加入 sync_episode_refs.py
+**commit 待推**
+
+---
+
 ## 🔴 下一個對話要先做
 
 ### Step 1：地點缺口建頁（重要）
@@ -91,6 +110,7 @@ python -X utf8 tools/enrich_places.py
 | `python -X utf8 tools/enrich_concepts.py` | Step3：補概念/店家/地點頁 |
 | `python -X utf8 tools/enrich_places.py` | Step4：補地點特色 |
 | `python -X utf8 tools/merge_aliases.py` | Step5：合併別名、修正連結 |
+| `python -X utf8 tools/sync_episode_refs.py` | Step5.5：同步 Entity 出現集數（補漏 + 階層傳遞）|
 | `python -X utf8 tools/enrich_related_concepts.py --phase2` | 補相關概念（共現） |
 | `python -X utf8 tools/generate_category_indexes.py` | Step7：重新生成人物/地點/店家/概念索引 |
 | ⚠️ 手動補 `Wiki/來源/肥宅老司機-集數索引.md` | Step7.5：新集數標題補進集數索引 |
