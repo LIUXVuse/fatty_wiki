@@ -17,9 +17,60 @@ merge_aliases.py — 合併別名頁面
 
 import re
 import sys
+import json
 import shutil
 import argparse
+import urllib.request
 from pathlib import Path
+
+OLLAMA_URL   = "http://localhost:11434/api/generate"
+OLLAMA_MODEL = "gemma3:27b"
+
+
+def merge_definitions(main_name: str, main_def: str, alias_defs: list[str],
+                      old_names: list[str]) -> str:
+    """用 Ollama 把多個定義融合成一段，並把舊名字替換成新名字。"""
+    # 先把舊名字替換掉（純文字，非連結）
+    def replace_old_names(text: str) -> str:
+        for old in old_names:
+            text = re.sub(re.escape(old), main_name, text)
+        return text
+
+    main_def = replace_old_names(main_def.strip())
+    alias_defs = [replace_old_names(d.strip()) for d in alias_defs if d.strip()]
+
+    # 過濾掉與主定義幾乎相同的別名定義
+    unique_alias = [d for d in alias_defs if d and d != main_def and len(d) > 10]
+    if not unique_alias:
+        return main_def  # 別名定義空或重複，直接用主定義
+
+    combined = f"主定義：{main_def}\n\n" + "\n\n".join(
+        f"補充定義 {i+1}：{d}" for i, d in enumerate(unique_alias)
+    )
+
+    prompt = f"""你是知識庫編輯。請把以下幾段關於「{main_name}」的定義，融合成一段流暢的繁體中文定義（100 字以內）。
+只輸出融合後的定義文字，不要標題、不要編號、不要解釋。
+
+{combined}"""
+
+    payload = json.dumps({
+        "model": OLLAMA_MODEL,
+        "prompt": prompt,
+        "stream": False,
+        "options": {"temperature": 0.1}
+    }).encode("utf-8")
+
+    try:
+        req = urllib.request.Request(
+            OLLAMA_URL, data=payload,
+            headers={"Content-Type": "application/json"}
+        )
+        with urllib.request.urlopen(req, timeout=60) as resp:
+            result = json.loads(resp.read())["response"].strip()
+        return result if result else main_def
+    except Exception as e:
+        print(f"    ⚠️  Ollama 定義融合失敗（{e}），保留原定義")
+        return main_def
 
 sys.stdout.reconfigure(encoding="utf-8")
 sys.stderr.reconfigure(encoding="utf-8")
@@ -99,14 +150,35 @@ ALIAS_MAP = {
     "芭提雅 GoGo Bar": ["芭達雅 GoGo Bar"],
 
     # ── 概念 音近字錯誤 / 合併 ────────────────────────────────
-    "龍筋": ["龍經", "隆經"],      # 筋/經/隆 音近；龍精保留獨立（另有精液之意）
+    "龍筋": ["龍經", "隆經", "龍精", "龍頸按摩"],  # 筋/經/隆/精/頸 音近；龍精按摩定義與龍筋相同
     "抓龍筋": ["抓龍精", "按龍機", "按龍經"],  # 精/機/經 均為筋的誤字
-    "毒龍": ["獨龍", "獨龍磚", "獨龍鑽"],    # 獨/毒 同音，磚/鑽為同概念變體
-    "共筆": ["共比"],                          # 比/筆 同音，指社群 Google 表單共筆
-    "老點": ["老店"],                          # 店/點 同音，都指長期熟客/固定服務人員關係
-    "口爆": ["口報"],                  # 爆/報 同音 bào
+    "毒龍": ["獨龍", "獨龍磚", "獨龍鑽", "賭龍"],  # 獨/毒/賭 同音
+    "共筆": ["共比"],                          # 比/筆 同音
+    "老點": ["老店"],                          # 店/點 同音
+    "口爆": ["口報"],
     "口爆店": ["口報店"],
-    "外國人料金": ["外國人料理"],      # 日文 ryōkin（費用）vs ryōri（料理）
+    "外國人料金": ["外國人料理"],
+    "武鬥派": ["五豆派"],                      # 五豆/武鬥 音近
+    "泰洗": ["太習"],                          # 太習=泰洗 誤字
+    "4P": ["四批"],                            # 批/P 音近
+    "低能量震波": ["正波與震波"],              # 同概念，名稱誤寫
+    "舔狗": ["田狗"],                          # 田/舔 音近
+    "日按": ["日暗"],                          # 暗/按 音近
+    "日洗": ["日襲"],                          # 日襲=日洗 誤字
+    "Heart to Heart": ["哈土哈", "哈圖"],      # 音譯誤字
+    "客評": ["客品"],                          # 評/品 音近
+    "偷時": ["偷師"],                          # 師/時 音近
+    "素股": ["豎鼓"],                          # 豎鼓=素股 誤字
+    "聖水": ["腎水"],                          # 腎/聖 音近
+    "龍宮": ["農工"],                          # 農工=龍宮 誤字
+    "雞頭": ["機頭"],                          # 機/雞 同音
+    "清水溝": ["親水溝"],                      # 親/清 音近
+    "短鐘": ["短中"],                          # 中/鐘 音近
+    "鵝寶寶": ["餓寶寶"],                      # 餓/鵝 同音
+    "輕功": ["親工"],                          # 親/輕 音近，均指口交服務
+    "半凹全": ["半拗拳"],                      # 拗/凹 音近
+    "長鍾": ["長盅 _ 短盅", "常中"],           # 長盅=長鍾；常/長 音近
+    "短鐘": ["短中"],                          # 中/鐘 音近（短中已在上方，此為備援）
 
     # ── Concepts 重複頁合併 ───────────────────────────────────
     "脫衣舞酒吧": ["脫衣舞酒吧 (Strip Club)"],
@@ -353,6 +425,9 @@ def merge_group(main_name: str, aliases: list[str], dry_run: bool) -> bool:
             continue
         other_sections[title] = body
 
+    # 收集別名的定義（供之後 Ollama 融合）
+    alias_definitions = []
+
     # 逐一把別名內容合併進來
     for alias_name, alias_path, alias_content in alias_data:
         alias_sections = parse_sections(alias_content)
@@ -371,7 +446,12 @@ def merge_group(main_name: str, aliases: list[str], dry_run: bool) -> bool:
             if ep_key not in combined_stories:
                 combined_stories[ep_key] = story_text
 
-        # 合併其他段落（把別名的簡介/評價追加，避免遺漏）
+        # 收集別名定義
+        for title, body in alias_sections.items():
+            if "定義" in title and body.strip():
+                alias_definitions.append(body.strip())
+
+        # 合併其他段落（定義另外處理，其餘段落只補缺）
         for title, body in alias_sections.items():
             if title == "__header__" or "出現集數" in title:
                 continue
@@ -379,9 +459,24 @@ def merge_group(main_name: str, aliases: list[str], dry_run: bool) -> bool:
                 continue
             if title.startswith("## 故事") or title.startswith("## 分享"):
                 continue
-            # 只在主名沒有相同段落時加入
+            if "定義" in title:
+                continue  # 定義另外處理
             if title not in other_sections and body.strip():
                 other_sections[title] = body
+
+    # 融合定義（有別名定義才呼叫 Ollama）
+    def_key = next((k for k in other_sections if "定義" in k), "## 定義")
+    main_def = other_sections.get(def_key, "").strip()
+    if alias_definitions:
+        merged_def = merge_definitions(main_name, main_def, alias_definitions, aliases)
+        other_sections[def_key] = "\n" + merged_def + "\n"
+    elif main_def:
+        # 即使沒別名定義，也把舊名字替換掉
+        fixed = main_def
+        for old in aliases:
+            fixed = re.sub(re.escape(old), main_name, fixed)
+        if fixed != main_def:
+            other_sections[def_key] = "\n" + fixed + "\n"
 
     # 重新組合內容
     new_content = rebuild_content(
