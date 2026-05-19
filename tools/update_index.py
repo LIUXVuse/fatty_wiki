@@ -49,6 +49,74 @@ n_total   = n_ep + n_other
 guide_files  = sorted([f for f in other_src if not f.stem.startswith("肥宅老司機")])
 theme_files  = sorted([f for f in other_src if f.stem.startswith("肥宅老司機") and f.stem != "肥宅老司機-集數索引"])
 
+# ── 來賓出場統計 ──────────────────────────────────────────────────────
+SKIP_PERSONS = {"肥宅老司機", "老濕", "老雞"}
+TOP_N = 12          # 主要名單顯示人數
+MIN_EPISODES = 5    # 自動納入門檻（集數）
+
+# 描述由人工維護（只需改這裡），集數範圍自動計算
+GUEST_DESCS = {
+    "喇賽":    "按摩保養、台灣 / 泰國 / 菲律賓踩點",
+    "老張":    "越南 / 日本探店",
+    "克里斯":  "包養網、線上到線下操作",
+    "藍甲蟲":  "包養文化、台灣夜生活",
+    "小茜":    "外送茶工作者、約炮心得",
+    "Beast":   "包養網、豆干厝",
+    "比爾":    "歐洲 FKK、日本泡泡浴",
+    "基德":    "不花錢獵色、3P 實戰",
+    "老王":    "成人娛樂媒合生態",
+    "小開":    "越南胡志明攻略",
+    "康熙":    "台灣酒店文化",
+    "小瓢蟲":  "情慾按摩、越南 KTV",
+    "吉米":    "保養習慣、台灣夜生活",
+    "Jay":     "東南亞酒吧互動",
+    "Ken":     "台灣踩點",
+    "老馬哥":  "日本泡泡浴文化專家",
+    "詹姆士":  "美國 / 墨西哥性產業",
+    "悠君":    "日本泡泡浴深度攻略",
+    "力書":    "性愛知識、BDSM 講師",
+    "小倩":    "外送茶工作者、直播",
+}
+# 主題代表性來賓（即使集數少也顯示在第二區塊）
+NOTABLE_GUESTS = ["老馬哥", "詹姆士", "力書"]
+
+def format_eps(eps, max_show=6):
+    ep_str = "、".join(f"S3EP{e}" for e in eps[:max_show])
+    if len(eps) > max_show:
+        ep_str += f"…共 {len(eps)} 集"
+    return ep_str
+
+person_eps = {}
+for f in person_dir.glob("*.md"):
+    if f.stem in SKIP_PERSONS:
+        continue
+    content = f.read_text(encoding="utf-8")
+    eps = sorted(set(int(e) for e in re.findall(r"\[\[肥宅老司機-S3EP(\d+)\]\]", content)))
+    if eps:
+        person_eps[f.stem] = eps
+
+ranked = sorted(person_eps.items(), key=lambda x: -len(x[1]))
+top_guests = [(name, eps) for name, eps in ranked if len(eps) >= MIN_EPISODES][:TOP_N]
+
+def guest_line(name, eps):
+    desc = GUEST_DESCS.get(name, "")
+    ep_str = format_eps(eps)
+    suffix = f" — {desc}（{ep_str}）" if desc else f"（{ep_str}）"
+    return f"- **[[{name}]]**{suffix}"
+
+guest_lines = ["依出場集數排序（全庫統計，主持人不列）：", ""]
+guest_lines += [guest_line(name, eps) for name, eps in top_guests]
+
+notable_lines = [
+    guest_line(name, person_eps[name])
+    for name in NOTABLE_GUESTS if name in person_eps
+]
+if notable_lines:
+    guest_lines += ["", "主題代表性（出場雖少但專長獨特）："]
+    guest_lines += notable_lines
+
+GUESTS = "\n".join(guest_lines)
+
 # ── 各 AUTO 區塊內容 ──────────────────────────────────────────────────
 today = date.today().strftime("%Y-%m-%d")
 
@@ -61,6 +129,16 @@ STATS = f"""\
 **地點數量**：{n_place}
 **Entities 合計**：{n_person + n_shop + n_place}
 **缺失集號**：{ep_missing}（共 {len(ep_missing)} 集）"""
+
+NAV = f"""\
+| 我想找…             | 直接跳轉                        |
+| ---------------- | --------------------------- |
+| 集數標題 / 嘉賓 / 主題分類 | [[肥宅老司機-集數索引]]              |
+| 人物（主持人、來賓、投稿者）   | [[肥宅老司機-人物索引]]（{n_person} 人）       |
+| 地點（城市、地區、國家）     | [[肥宅老司機-地點索引]]（{n_place} 個）或下方地域導航 |
+| 店家查詢（按城市分類）      | [[肥宅老司機-店家索引]]（{n_shop} 家）       |
+| 術語 / 概念定義        | [[肥宅老司機-概念索引]]（{n_concept} 個）       |
+| 旅遊指南 PDF         | 下方「旅遊指南」區塊                  |"""
 
 GUIDES = "\n".join(f"- [[{f.stem}]]" for f in guide_files)
 
@@ -78,8 +156,14 @@ def replace_block(text: str, tag: str, new_content: str) -> str:
 
 text = OUT.read_text(encoding="utf-8")
 text = replace_block(text, "AUTO-STATS",  STATS)
+text = replace_block(text, "AUTO-NAV",    NAV)
+text = replace_block(text, "AUTO-GUESTS", GUESTS)
 text = replace_block(text, "AUTO-GUIDES", GUIDES)
 text = replace_block(text, "AUTO-THEMES", THEMES)
+# 替換散落的硬編碼數字（不在 AUTO 區塊內的那些）
+text = re.sub(r"完整 \d+ 個概念詳見", f"完整 {n_concept} 個概念詳見", text)
+text = re.sub(r"完整 \d+ 人詳見", f"完整 {n_person} 人詳見", text)
+
 OUT.write_text(text, encoding="utf-8")
 
 print(f"✅ 索引已更新：{OUT}")
