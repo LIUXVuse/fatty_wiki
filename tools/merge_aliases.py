@@ -341,7 +341,25 @@ def rebuild_content(main_name: str, header: str,
 # ═══════════════════════════════════════════════════════════════
 
 def update_wiki_links(old_names: list[str], new_name: str, dry_run: bool):
-    """全站替換 [[別名]] → [[主名]]，掃 Wiki/ 所有 .md"""
+    """全站替換 [[別名]] → [[主名]]，掃 Wiki/ 所有 .md。
+    同時處理衍生複合詞：若 [[舊名店]] 不存在但 [[新名店]] 存在，也一併替換。"""
+    # 建立所有頁面名稱集合，用來判斷衍生複合詞是否有效
+    existing_pages: set[str] = set()
+    for d in ALL_PAGE_DIRS + [SOURCES]:
+        for p in d.glob("*.md"):
+            existing_pages.add(p.stem)
+
+    # 建立完整替換對照表（含衍生複合詞）
+    replace_map: dict[str, str] = {}
+    for old in old_names:
+        replace_map[old] = new_name
+        # 衍生複合詞：老名+後綴 → 新名+後綴（僅當目標頁存在時）
+        for suffix in ("店", "按摩", "服務", "課"):
+            derived_old = old + suffix
+            derived_new = new_name + suffix
+            if derived_new in existing_pages:
+                replace_map[derived_old] = derived_new
+
     changed_files = 0
     for md_file in WIKI.rglob("*.md"):
         try:
@@ -349,11 +367,11 @@ def update_wiki_links(old_names: list[str], new_name: str, dry_run: bool):
         except Exception:
             continue
         updated = original
-        for old in old_names:
+        for old, new in replace_map.items():
             # 替換 [[old]] 和 [[old|...]] 兩種形式
             updated = re.sub(
                 r'\[\[' + re.escape(old) + r'(\|[^\]]+)?\]\]',
-                f'[[{new_name}]]',
+                f'[[{new}]]',
                 updated
             )
         if updated != original:
