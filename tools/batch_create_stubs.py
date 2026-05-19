@@ -197,6 +197,17 @@ def main():
             if l and l not in all_pages:
                 missing_files[l].append(f.stem)
 
+    # 從 merge_aliases.py 和 enrich_concepts.py 載入所有別名（不應建新頁）
+    alias_values: set[str] = set()
+    for script_path in [BASE / "tools" / "merge_aliases.py",
+                        BASE / "tools" / "enrich_concepts.py"]:
+        try:
+            src = script_path.read_text(encoding="utf-8", errors="ignore")
+            for m in re.finditer(r'"([^"]+)"', src):
+                alias_values.add(m.group(1))
+        except Exception:
+            pass
+
     # 過濾
     targets = []
     for name, files in missing_files.items():
@@ -207,6 +218,8 @@ def main():
             continue
         if any(re.search(p, name) for p in SKIP_PATTERNS):
             continue
+        if name in alias_values:
+            continue  # 是別名，不建頁（merge_aliases 會修連結）
         targets.append((count, name, files))
 
     targets.sort(key=lambda x: -x[0])
