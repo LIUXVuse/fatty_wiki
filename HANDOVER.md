@@ -1,101 +1,70 @@
 ## ✅ 本次完成（2026-05-19）
 
-### 流水線前瞻修復 — 新逐字稿不再需要手動補救
+### 建立 12 個缺漏地點頁 + 補地點特色 + 更新索引
 
-**commit cf8aaf2**：4 files changed
+**新建地點頁**（全部帶正確上層地點 / 國家欄位）：
+- 台灣：中壢（桃園）、苗栗、萬華區（台北）、中和（新北）、新竹、三重（新北）、林森北（台北）
+- 日本：沖繩
+- 德國：法蘭克福
+- 墨西哥：Tijuana
+- 加拿大：多倫多
+- 美國：拉斯維加斯
 
-#### 1. ingest_ollama.py — Ollama 別名在入口即修正
-`build_canonical_map()` 現在同時載入 ALIAS_MAP + CONCEPT_ALIAS_MAP。
-Ollama 輸出 `[[龍精]]`、`[[親工]]`、`[[長中]]` 等音近字時，Source 頁建立當下就自動修正。
-不再等到 merge_aliases 才發現，不再產生孤立別名頁。
+**sync_episode_refs.py**：13 個頁面，補入 90 筆集數。
 
-#### 2. enrich_contributors.py — is_fully_processed() 加嚴
-標題存在但段落空白（Ollama 無輸出）→ 仍視為未完整，下次重試。
-防止 Ollama 輸出失敗時永久跳過某集。
+**enrich_places.py**：13 個地點補完「## 特色」段落（含舊的清遠）。
 
-#### 3. enrich_concepts.py — 新增 --force-ep 旗標
-```bash
-python -X utf8 tools/enrich_concepts.py --force-ep S3EP263
-```
-強制重跑指定集並從 processed.json 移除，補救時不再需要手改 JSON。
+**索引更新**：
+- `generate_category_indexes.py` 重生成地點索引（47 → 59）
+- `update_index.py` 更新主索引
 
-#### 4. merge_aliases.py — 長鍾補 "長中" 別名
-確保 `[[長中]]` 能被 canonical_map 在入口修正到 `[[長鍾]]`。
+地點數：47 → 59。
 
 ---
 
-## ✅ 本次完成（2026-05-19）
+## ✅ 本次完成（2026-05-19，前次）
 
-### sync_episode_refs.py — 全庫 Entity 出現集數補漏
+### 流水線前瞻修復 + sync_episode_refs + 全庫斷連結修正 + merge_aliases 強化
 
-**根本原因**：enrich_concepts.py 以 Ollama 提取 entity，粒度不一致
-（如提取「雅加達」但未提取「印尼」），導致國家頁不收錄子城市集數。
-
-**新腳本 `tools/sync_episode_refs.py`**：
-- 反向掃描所有來源頁的 [[連結]] 建立 entity 反向索引
-- 補漏各頁「## 出現集數」中缺漏的集數引用
-- 階層傳遞：城市集數自動傳到上層國家（依 **國家** 欄位）
-- 本次修正：163 個頁面，補入 1099 筆集數（含 印尼.md 收到 EP263）
-
-**CLAUDE.md SOP 新增 Step 5.5**（每次 Step 3-5 後必跑）
-
----
-
-## ✅ 本次完成（2026-05-19）
-
-### 全庫斷連結修正（改名/合併遺漏）
-- 掃描 來源/概念/人物/店家/地點 全部 .md，修正 99 個檔案、144 條連結
-- 另修正複合詞 1 個檔案、2 條（如 `[[龍經店]]→[[龍筋店]]`）
-- `update_wiki_links()` 強化：合併時自動推導衍生複合詞後綴
-
----
-
-## ✅ 本次完成（2026-05-19）
-
-### merge_aliases.py 定義融合強化 + 32 個錯字概念頁改名
-- 新增 `merge_definitions()`：Ollama 融合主名+別名定義
-- 32 個錯字概念頁批次改名（五套→無套、管事服務→莞式 等）
-- ~25 組 ALIAS_MAP 新增別名對
+- **ingest_ollama.py**：別名在入口即修正，不再產生孤立別名頁
+- **enrich_contributors.py**：is_fully_processed() 加嚴防止 Ollama 輸出失敗永久跳過
+- **enrich_concepts.py**：新增 `--force-ep` 旗標強制重跑指定集
+- **merge_aliases.py**：新增 merge_definitions()；32 個錯字頁改名；~25 組新別名
+- **tools/sync_episode_refs.py**（新腳本）：163 頁面補 1099 筆集數，支援階層傳遞
+- 全庫斷連結修正：99 檔案 144 條
 
 ---
 
 ## 🔴 下一個對話要先做
 
-### Step 1：建立缺漏的地點頁（高優先）
-
-全庫掃出 **1128 個連結指向不存在頁面**，其中高頻未建地點頁：
-
-| 地點 | 出現次數 | 備註 |
-|------|---------|------|
-| 中壢 | 30 | 台灣桃園市 |
-| 苗栗 | 15 | 台灣 |
-| 萬華區 | 15 | 台北市 |
-| 中和 | 13 | 新北市 |
-| 新竹 | 13 | 台灣 |
-| 三重 | 12 | 新北市 |
-| 林森北 | 12 | 台北市 |
-| 沖繩 | 17 | 日本 |
-| 法蘭克福 | 17 | 德國 |
-| Tijuana | 19 | 墨西哥 |
-| 多倫多 | 16 | 加拿大 |
-| 拉斯維加斯 | 9 | 美國 |
-
-**做法**：可用 `enrich_concepts.py` 的地點建立邏輯批量建，或逐一手動建。
-建完後跑一次 `sync_episode_refs.py` 讓集數自動填入。
-
-### Step 2：補充地點特色
+### Step 1：掃描剩餘斷連結（可選）
 ```bash
-python -X utf8 tools/enrich_places.py
+python -X utf8 tools/check_links.py
 ```
+確認 1128 個斷連結中還剩多少（本次建了 12 個地點頁後應大幅減少）。
+
+### Step 2：新集數 ingest（有新逐字稿時）
+```bash
+python -X utf8 tools/ingest_ollama.py
+python -X utf8 tools/enrich_contributors.py
+python -X utf8 tools/enrich_concepts.py
+python -X utf8 tools/enrich_places.py
+python -X utf8 tools/merge_aliases.py
+python -X utf8 tools/sync_episode_refs.py
+python -X utf8 tools/generate_category_indexes.py
+python -X utf8 tools/update_index.py
+```
+⚠️ 記得手動補 `Wiki/來源/肥宅老司機-集數索引.md`（Step 7.5）
 
 ---
 
 ## ⚠️ 已知問題 / 注意事項
 
-- **1128 個連結指向不存在頁面**（主要是未建地點頁的城市）
-- `enrich_places.py` 不會自動更新已填地點的特色，若要重生成需改回「（待補充）」
+- **斷連結**：建 12 個地點頁前有 1128 個，建完後未重新統計，下次可跑 check_links.py 確認
+- `enrich_places.py` 不會更新已填地點的特色，若要重生成需改回「（待補充）」
 - `enrich_contributors.py` 的相似名字警告寫進 merge_suggestions.txt，無自動驗證流程
 - PG島 無對應地點頁（索引已改為純文字）
+- 缺失集號：S3EP20、153、167、174、198、211
 
 ---
 
@@ -124,7 +93,7 @@ python -X utf8 tools/enrich_places.py
 | 概念 | 670 |
 | 人物 | 341 |
 | 店家 | 529 |
-| 地點 | 47 |
+| 地點 | 59 |
 
 ---
 
