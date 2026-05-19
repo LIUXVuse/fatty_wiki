@@ -10,3 +10,8 @@
 - [[肥宅老司機-S3EP3]] — 包含 BD (Bondage & Discipline 捆綁與調教)、DS (Dominance & Submission 支配與臣服)、SM (Sadism & Masochism 施虐與受虐)。
 
 ## 相關概念
+- [[Dirty Talk]] — 共現相關概念
+- [[微M]] — 共現相關概念
+- [[固炮]] — 共現相關概念
+- [[中出]] — 共現相關概念
+- [[次輪]] — 共現相關概念

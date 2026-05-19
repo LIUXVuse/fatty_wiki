@@ -10,3 +10,6 @@ Bareback Full Service，無套全套服務。
 
 ## 相關概念
 - [[CFS]]
+- [[Raw]] — 不帶套的性行為
+- [[Raw Dogging]] — 裸體性行為（無保護）
+- [[BBBJ]] — 不帶套的口交服務

@@ -10,3 +10,8 @@ Covered Full Service，有套全套服務。
 
 ## 相關概念
 - [[BBFS]]
+- [[IC 與 OC 與 CD]] — 共現相關概念
+- [[GFE]] — 共現相關概念
+- [[Provider]] — 共現相關概念
+- [[CBJ]] — 共現相關概念
+- [[LFK]] — 共現相關概念

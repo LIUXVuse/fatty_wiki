@@ -9,3 +9,5 @@ Japanese-style Karaoke，日式 KTV，通常定位較高，管理較嚴。
 - [[肥宅老司機-S3EP226]] — Japanese-style Karaoke，日式 KTV，通常定位較高，管理較嚴。
 
 ## 相關概念
+- [[GoGo Bar]] — 共現相關概念
+- [[Lady Drink]] — 共現相關概念
