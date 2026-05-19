@@ -322,8 +322,17 @@ def build_hosts_section(hosts: dict) -> str:
 
 
 def is_fully_processed(sources_text: str) -> bool:
-    """Sources 頁同時含有 ## 來賓分享 和 ## 主持人觀點 才算處理完"""
-    return "## 來賓分享" in sources_text and "## 主持人觀點" in sources_text
+    """Sources 頁同時含有 ## 來賓分享 和 ## 主持人觀點，且兩段都有實際內容才算完整處理。
+    只有標題沒有內容（Ollama 無輸出）不算完整，下次仍會重試。"""
+    import re as _re
+    for heading in ("## 來賓分享", "## 主持人觀點"):
+        if heading not in sources_text:
+            return False
+        # 確認段落有實際內容（不只是標題行）
+        m = _re.search(re.escape(heading) + r'\n(.*?)(?=\n##|\Z)', sources_text, _re.DOTALL)
+        if not m or not m.group(1).strip():
+            return False
+    return True
 
 
 def remove_old_contributors_section(text: str) -> str:

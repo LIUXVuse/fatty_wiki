@@ -558,7 +558,10 @@ def process_source_file(filepath: Path):
 def main():
     parser = argparse.ArgumentParser(description="從 Sources 頁提取並建立/更新 Wiki 概念頁")
     parser.add_argument("--test", type=int, metavar="N", help="只跑前 N 個未處理的檔案")
-    parser.add_argument("--ep", type=str, metavar="EP", help="只跑指定集數，例如 S3EP100")
+    parser.add_argument("--ep", type=str, metavar="EP",
+                        help="只跑指定集數（跳過 processed 記錄），例如 S3EP100")
+    parser.add_argument("--force-ep", type=str, metavar="EP",
+                        help="強制重跑指定集數並從 processed 移除記錄（用於補救）")
     args = parser.parse_args()
 
     processed = load_processed()
@@ -566,8 +569,20 @@ def main():
     # 取得所有 Sources 頁
     all_sources = sorted(SOURCES_DIR.glob("*.md"))
 
-    if args.ep:
-        # 指定集數模式
+    if args.force_ep:
+        # 強制重跑模式：從 processed 清單移除後重跑，讓 entity 頁補上缺漏
+        pattern = args.force_ep.upper()
+        targets = [f for f in all_sources if pattern in f.name.upper()]
+        if not targets:
+            print(f"找不到包含 '{args.force_ep}' 的 Sources 頁")
+            sys.exit(1)
+        # 從 processed 移除
+        removed = [n for n in processed if pattern in n.upper()]
+        processed = [n for n in processed if pattern not in n.upper()]
+        save_processed(processed)
+        print(f"強制重跑模式：{targets[0].name}（已從 processed 移除：{removed}）")
+    elif args.ep:
+        # 指定集數模式（不修改 processed）
         pattern = args.ep.upper()
         targets = [f for f in all_sources if pattern in f.name.upper()]
         if not targets:

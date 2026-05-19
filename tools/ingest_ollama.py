@@ -212,12 +212,31 @@ def call_ollama(prompt: str) -> str:
         return ""
 
 def build_canonical_map() -> dict[str, str]:
-    """掃描 Wiki 各資料夾，回傳 {小寫名稱: 正確檔名（不含.md）}"""
+    """掃描 Wiki 各資料夾，回傳 {小寫名稱: 正確檔名（不含.md）}。
+    同時載入 ALIAS_MAP 和 CONCEPT_ALIAS_MAP，讓 Ollama 輸出的別名
+    在 Source 頁建立時就被修正（如 [[龍精]] → [[龍筋]]）。"""
     canonical = {}
     for folder in ("概念", "人物", "店家", "地點"):
         for f in (BASE / "Wiki" / folder).glob("*.md"):
             name = f.stem
             canonical[name.lower()] = name
+
+    # 載入別名對照（Ollama 音近字誤辨識 → 正確主名）
+    try:
+        import sys as _sys
+        _tools = str(BASE / "tools")
+        if _tools not in _sys.path:
+            _sys.path.insert(0, _tools)
+        from merge_aliases import ALIAS_MAP
+        from enrich_concepts import CONCEPT_ALIAS_MAP
+        for main_name, aliases in ALIAS_MAP.items():
+            for alias in aliases:
+                canonical[alias.lower()] = main_name
+        for alias, main_name in CONCEPT_ALIAS_MAP.items():
+            canonical[alias.lower()] = main_name
+    except Exception:
+        pass  # 載入失敗就只用檔案名稱正規化，不影響主流程
+
     return canonical
 
 
