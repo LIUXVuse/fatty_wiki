@@ -107,6 +107,8 @@ CONCEPT_ALIAS_MAP = {
     "混 K":     "混K",
     "Bar-fine": "Bar Fine",
     "Club 模式": "Club模式",
+    # 簡繁體差異
+    "演员":     "演員",   # 簡體「员」→繁體「員」
 }
 
 
