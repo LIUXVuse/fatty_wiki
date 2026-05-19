@@ -352,16 +352,38 @@ field_value = re.sub(r'\[\[([^\]|]+)(?:\|[^\]]+)?\]\]', r'\1', field_value).stri
 
 ## 🔴 下一個對話要先做
 
-### Step 0（最高優先）：繼續補強剩餘地點頁
+### Step 0（最高優先）：補強薄弱店家頁
 
-**本次已完成的地點補強（第四波）**：
-拉斯維加斯、上海、雅加達、天使城、BGC
+**模式同本次地點補強**：從來源頁挖真實資料，寫進店家 .md，無虛構。
 
-**目前地點頁全部 ✅**（大集數頁都有實質內容）
+**執行流程**：
+1. 找出內容最薄弱的店家頁（優先抓集數 ≥ 3 但內容只有 stub 的）：
+   ```bash
+   python3 -c "
+   import sys; sys.stdout.reconfigure(encoding='utf-8')
+   from pathlib import Path
+   pages = sorted(Path('Wiki/店家').glob('*.md'), key=lambda f: len(f.read_text(encoding='utf-8')))
+   for f in pages[:30]:
+       text = f.read_text(encoding='utf-8')
+       print(f'{len(text):5d}b  {f.stem}')
+   "
+   ```
+2. 對每個薄弱店家頁：搜尋來源頁（grep `[[店家名]]`），讀相關集數，補充真實資料
+3. 補完後跑：
+   ```bash
+   python -X utf8 tools/generate_category_indexes.py
+   python -X utf8 tools/update_index.py
+   ```
+4. commit + push
 
-### 還可以進一步補強的地點
+**優先補強目標（高集數但內容薄）**：
+- GoGo Bar 系列（天使城、芭提雅）
+- KTV 系列（各城市）
+- 按摩店系列（台灣本島）
+
+### 地點頁後續
 - **菲律賓 馬卡蒂**：無足夠來源資料，需待後續集數補
-- **苗栗/基隆/新竹/三重**：各 7-8 集，內容偏薄
+- **苗栗/基隆/新竹/三重**：各 7-8 集，內容偏薄（可順帶補）
 
 ### 前次 Step 0（已完成 ✅）：4 個分類索引內容核查 + 腳本優化
 
