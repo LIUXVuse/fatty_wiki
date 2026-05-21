@@ -109,13 +109,17 @@ fatty_wiki/
 
 **Step 4 — 機械腳本收尾**
 
-跑這 4 個腳本（純計數/連結任務，無需理解內容）：
+⚠️ **merge_aliases.py 禁止用來合併頁面內容**（會插入低品質 stub 破壞手寫頁面）。
+別名頁的合併一律由 Claude 手動讀取、手動寫入主頁、手動刪 stub。
+
+只跑以下 3 個不改寫內容的腳本：
 ```bash
-python -X utf8 tools/merge_aliases.py
 python -X utf8 tools/sync_episode_refs.py
 python -X utf8 tools/generate_category_indexes.py
 python -X utf8 tools/update_index.py
 ```
+
+ALIAS_MAP 仍然維護（供全站連結替換追蹤），但**不執行 merge_aliases.py**。
 
 **Step 4.5 — 手動補集數索引（⚠️ 手動）**
 在 `Wiki/來源/肥宅老司機-集數索引.md` 對應區段補一行：
