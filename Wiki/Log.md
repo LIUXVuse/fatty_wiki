@@ -1,6 +1,34 @@
 # 操作記錄
 
-## 2026-05-18（補救流程 fix — 全庫重跑 + 地點特色 + 連結整理）
+## 2026-05-23（PDF ingest — 雅加達夜生活攻略）
+
+### 處理內容
+- 讀取並 ingest `Raw/claude/印尼"雅加达"_夜生活攻略【夜游Happy小组】Timxiaohuang_com.pdf`（2025年3月版，12頁）
+- 建立來源頁：`Wiki/來源/雅加達夜生活攻略2025（夜游Happy小组）.md`
+- 新建店家頁（共 6 個）：
+  - `Hotel Royal VIP.md`（酒吧街高端，顏值首選）
+  - `MALIOBORO SPA.md`（中高端全套SPA，進口妹+雙飛Happy Hour）
+  - `FASHION HOTEL.md`（中端全套SPA，可與妹子同游泳）
+  - `DEEP SPA.md`（日式Nuru半套，SM風格，日本人開設）
+  - `VN SPA.md`（日式Nuru半套，每日7種變裝主題）
+  - `LAMAROCA SPA.md`（日式Nuru半套，波斯異域風情）
+- 更新現有頁面：
+  - `Wiki/店家/1001.md`：補充 KTV 詳細費用（來自PDF）
+  - `Wiki/地點/雅加達.md`：加入 11 家新店家連結及 PDF 來源
+- PDF 移至 `Raw/processed/`
+
+### 知識庫現況
+| 類型 | 數量 |
+|------|------|
+| 來源 | 291（+1 PDF 攻略） |
+| 概念 | 749 |
+| 人物 | 414 |
+| 店家 | 617（+6） |
+| 地點 | 166 |
+
+---
+
+
 
 ### 處理內容
 - `enrich_concepts.py` 全庫重跑（286 集），同時修正兩個 bug：
