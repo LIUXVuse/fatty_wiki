@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Wiki/店家/湖口榕樹下.md",
+                "file": "Wiki/人物/小藥師.md",
                 "mode": "preview",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "湖口榕樹下"
+              "title": "小藥師"
             },
             "group": "a2811572e1ed1e90"
           }
@@ -34,7 +34,7 @@
             "state": {
               "type": "localgraph",
               "state": {
-                "file": "Wiki/店家/湖口榕樹下.md",
+                "file": "Wiki/人物/小藥師.md",
                 "options": {
                   "collapse-filter": true,
                   "search": "",
@@ -62,7 +62,7 @@
                 }
               },
               "icon": "lucide-git-fork",
-              "title": "湖口榕樹下 的關聯圖"
+              "title": "小藥師 的關聯圖"
             },
             "group": "a2811572e1ed1e90"
           }
@@ -239,19 +239,22 @@
   },
   "active": "06135b07ef23bdaf",
   "lastOpenFiles": [
-    "CLAUDE.md.tmp.41268.1779710930237",
-    "CLAUDE.md.tmp.41268.1779710920767",
-    "tools/merge_aliases.py.tmp.41268.1779710896898",
-    "Wiki/來源/肥宅老司機-S3EP264.md.tmp.41268.1779710889711",
-    "tools/merge_aliases.py.tmp.41268.1779710877654",
-    "Wiki/索引.md.tmp.41268.1779710867771",
-    "Wiki/概念/私台.md",
-    "Wiki/概念/私台.md.tmp.41268.1779710851731",
-    "Wiki/索引.md.tmp.41268.1779710779429",
-    "Wiki/索引.md.tmp.41268.1779710770521",
-    "HANDOVER.md.tmp.41268.1779710384647",
-    "HANDOVER.md.tmp.41268.1779710375667",
+    "Wiki/店家/sedtFmtv4",
+    "Wiki/地點/sed3LrmuW",
+    "Wiki/地點/sedXt6WLi",
+    "Wiki/來源/sedZoOFYO",
+    "Wiki/來源/sedvMeaOy",
+    "Wiki/來源/sedqBPwAJ",
+    "Wiki/來源/sedwaDJqZ",
+    "Wiki/來源/sed5zfcqC",
+    "Wiki/來源/sedKocQwG",
+    "Wiki/來源/sedaveRCL",
+    "Wiki/人物/sedVj0bom",
+    "Wiki/店家/富國 KTV.md",
+    "Wiki/人物/無心插柳柳橙汁.md",
     "Wiki/店家/永勳藥局.md",
+    "Wiki/店家/湖口榕樹下.md",
+    "Wiki/概念/私台.md",
     "Wiki/概念/師台.md",
     "Wiki/概念/壯陽藥.md",
     "Wiki/人物/泰瑞.md",
@@ -272,9 +275,6 @@
     "Wiki/店家/Kokoro Massage.md",
     "Wiki/店家/Klub 25.md",
     "Wiki/店家/Dubai Luxury Club.md",
-    "Wiki/店家/Kawaii Bar & Massage.md",
-    "Wiki/店家/太子酒店.md",
-    "Wiki/店家/某國小教室.md",
     "肥宅老司機知識圖譜.png",
     "肥宅老司機知識圖譜 1.png",
     "肥宅老司機知識圖譜 2.png",
