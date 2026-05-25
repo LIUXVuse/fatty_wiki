@@ -1,10 +1,3 @@
 {
-  "tasks": [
-    {
-      "id": "60512b6a",
-      "cron": "19 0 26 5 *",
-      "prompt": "【自動排程任務：fatty_wiki 補強】\n\n現在是凌晨，用戶在睡覺。請依照優先順序完成以下工作，全部做完後 commit + push。\n\n**讀 HANDOVER.md 和 CLAUDE.md 先了解現況（強制）**\n\n---\n\n## 任務清單（依序執行）\n\n### 1. 薄地點頁補強（8 個）\n讀每個地點頁，找對應來源集數，補入實際內容取代 placeholder：\n- Wiki/地點/三重.md\n- Wiki/地點/中壢.md\n- Wiki/地點/大阪.md\n- Wiki/地點/清邁.md\n- Wiki/地點/深圳.md\n- Wiki/地點/江南.md\n- Wiki/地點/苗栗.md\n- Wiki/地點/青年路手天使棠棠.md（這是店家不是地點，確認後視情況移到店家/）\n\n每個地點頁：\n1. 讀現有內容 + 找出現集數\n2. 讀對應來源頁\n3. 填入：城市描述、推薦場所、場所費用、攻略要點、出現集數\n\n### 2. 薄人物頁補強（優先 10 個）\n以下人物有實質故事機率最高，讀其出現的來源頁，補入內容：\n- 巴二爺（S3EP136 — 確認是否為 guest 還是投稿者）\n- 少東\n- 山岸逢花\n- 老油\n- 揮仔\n- 牛郎\n- 王哥\n- 白小燕\n- 雞腿哥\n- 阿宏\n\n每個人物頁：\n1. 讀現有頁面\n2. grep 找出所有出現集數\n3. 讀來源頁的對應段落\n4. 補入：背景、分享內容、知識點\n\n### 3. 店家 復國.md 處理\nWiki/店家/復國.md 是重定向到「復國 (Phu Quoc)」但名稱本身已在本次 session 確認為誤字（富國才對）。\n- 檢查「復國 (Phu Quoc).md」是否已改名為「富國.md」或「富國 KTV.md」\n- 若還沒改：執行改名 + 更新所有引用\n\n### 4. 跑腳本更新索引\n```bash\npython -X utf8 tools/sync_episode_refs.py\npython -X utf8 tools/generate_category_indexes.py\npython -X utf8 tools/update_index.py\n```\n\n### 5. Commit + Push\n```bash\ngit add -A\ngit commit -m \"[session] 地點/人物薄頁補強 + 富國名稱修正\"\nGH_TOKEN=\"\" git push\n```\n\n### 6. 更新 HANDOVER.md\n記錄本次完成的補強內容，列出還未完成的項目。\n\n---\n\n**注意事項：**\n- 錯字一律寫入 tools/merge_aliases.py 的 ALIAS_MAP\n- 建/改頁面前先別名查核\n- 人物頁合併時手工讀兩頁再整合\n- merge_aliases.py 禁止執行（只讀 ALIAS_MAP）\n",
-      "createdAt": 1779711827922
-    }
-  ]
+  "tasks": []
 }
