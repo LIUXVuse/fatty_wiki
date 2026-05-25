@@ -1,7 +1,7 @@
 # T-Ded 99
 
 **類型**：泰式 GoGo Bar（Agogo）
-**城市**：[[曼谷]]
+**地點**：[[曼谷]]（[[泰國]]）
 **位置**：Suttisan 區，BTS Saphan Khwai 站步行 400 米；打 Grab 搜「T-Ded99」
 **定位**：曼谷性價比最高的泰式 GoGo Bar，以便宜、妹子多著稱
 

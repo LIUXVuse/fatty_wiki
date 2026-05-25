@@ -5,7 +5,7 @@
 **服務類型**：脫衣舞表演、包廂（上樓）服務
 
 ## 特色
-Tijuana 本地人聚集的脫衣舞酒吧，氣氛較 [[Hong Kong Gentleman's Club]] 輕鬆，不強制點 Lady Drink，妹子風格多元（不限大胸大臀一種路線）。
+Tijuana 本地人聚集的脫衣舞酒吧，氣氛較 [[Hong Kong Gentlemen's Club]] 輕鬆，不強制點 Lady Drink，妹子風格多元（不限大胸大臀一種路線）。
 
 嘉賓 Jay（S3EP59）推薦：
 > 「追求互動感的玩家，或喜歡非主流身材的人，建議去 Adelaida。」
@@ -26,7 +26,7 @@ Tijuana 本地人聚集的脫衣舞酒吧，氣氛較 [[Hong Kong Gentleman's Cl
 ## Tijuana 店家比較
 | 店家 | 特色 | 適合誰 |
 | :--- | :--- | :--- |
-| [[Hong Kong Gentleman's Club]] | 規模最大，外型為主 | 追求顏值 |
+| [[Hong Kong Gentlemen's Club]] | 規模最大，外型為主 | 追求顏值 |
 | Adelaida | 無門票，本地人多，多元風格 | 追求互動感 |
 
 ## 出現集數

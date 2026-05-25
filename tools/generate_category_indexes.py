@@ -371,10 +371,14 @@ def normalize_location(loc: str) -> str:
         ("日本（確切",           "日本（其他）"),
         ("日本（透過",           "日本（其他）"),
         # ── 台灣：雲林補充 ──────────────────────────────────────
+        ("雲嘉南地區",           "雲嘉南（台灣）"),
         ("雲林縣",               "雲林（台灣）"),
         ("虎尾（雲林",           "雲林（台灣）"),
         # ── 台灣：蘆洲補充 ──────────────────────────────────────
         ("蘆洲，",               "蘆洲（新北）"),
+        # ── 台灣：永和（新北）───────────────────────────────────
+        ("永和（新北",           "永和（新北）"),
+        ("永和，新北",           "永和（新北）"),
         # ── 台灣：萬華（屬台北）───────────────────────────────
         ("萬華區",               "台北"),
         ("西門町（台北）",       "台北"),
@@ -445,11 +449,138 @@ def normalize_location(loc: str) -> str:
     return loc
 
 
+COUNTRY_MAP = {
+    # 台灣
+    "台北":           "台灣",
+    "台中":           "台灣",
+    "台南":           "台灣",
+    "高雄":           "台灣",
+    "新竹":           "台灣",
+    "桃園":           "台灣",
+    "中壢（桃園）":   "台灣",
+    "三重（新北）":   "台灣",
+    "中和（新北）":   "台灣",
+    "板橋（新北）":   "台灣",
+    "蘆洲（新北）":   "台灣",
+    "苗栗（台灣）":   "台灣",
+    "雲林（台灣）":   "台灣",
+    "嘉義（台灣）":   "台灣",
+    "台灣中部":       "台灣",
+    "永和（新北）":   "台灣",
+    "雲嘉南（台灣）": "台灣",
+    # 日本
+    "東京（日本）":   "日本",
+    "大阪（日本）":   "日本",
+    "北海道（日本）": "日本",
+    "沖繩（日本）":   "日本",
+    "神戶（日本）":   "日本",
+    "日本（其他）":   "日本",
+    # 泰國
+    "曼谷（泰國）":   "泰國",
+    "芭提雅（泰國）": "泰國",
+    "清邁（泰國）":   "泰國",
+    "普吉（泰國）":   "泰國",
+    "泰國（其他）":   "泰國",
+    # 越南
+    "胡志明（越南）": "越南",
+    "河內（越南）":   "越南",
+    "峴港（越南）":   "越南",
+    "富國島（越南）": "越南",
+    "芽莊（越南）":   "越南",
+    "越南（其他城市）": "越南",
+    "越南（地點未明）": "越南",
+    # 韓國
+    "首爾（韓國）":   "韓國",
+    "韓國（其他）":   "韓國",
+    # 菲律賓
+    "天使城（菲律賓）": "菲律賓",
+    "馬尼拉（菲律賓）": "菲律賓",
+    "PG島（菲律賓）": "菲律賓",
+    "菲律賓（其他）": "菲律賓",
+    # 印尼
+    "雅加達（印尼）": "印尼",
+    "萬隆（印尼）":   "印尼",
+    "物加市（印尼）": "印尼",
+    # 馬來西亞
+    "吉隆坡（馬來西亞）": "馬來西亞",
+    "JB（馬來西亞）": "馬來西亞",
+    # 中國大陸
+    "東莞（中國）":   "中國",
+    "廣州（中國）":   "中國",
+    "上海（中國）":   "中國",
+    "深圳（中國）":   "中國",
+    # 港澳
+    "香港":           "香港",
+    "澳門":           "澳門",
+    # 東南亞其他
+    "新加坡":         "新加坡",
+    "寮國（永珍）":   "寮國",
+    "寮國（其他城市）": "寮國",
+    # 北美
+    "多倫多（加拿大）": "加拿大",
+    "溫哥華（加拿大）": "加拿大",
+    "舊金山（美國）": "美國",
+    "Tijuana（墨西哥）": "墨西哥",
+    # 歐洲 / 中東
+    "法蘭克福（德國）": "德國",
+    "杜拜（UAE）":    "阿聯酋",
+}
+
+COUNTRY_ORDER = [
+    "台灣", "日本", "泰國", "越南", "韓國",
+    "菲律賓", "印尼", "馬來西亞", "中國", "香港",
+    "澳門", "新加坡", "寮國", "加拿大", "美國",
+    "墨西哥", "德國", "阿聯酋", "澳洲", "葡萄牙",
+    "西班牙", "柬埔寨", "其他",
+]
+
+
+def get_country(city: str) -> str:
+    """Map a canonical city string to its country for the two-level index."""
+    if city in COUNTRY_MAP:
+        return COUNTRY_MAP[city]
+    # Pattern fallbacks — catches verbose strings that normalize_location left untouched
+    if "台灣" in city or city in ("線上（台灣）", "網路平台（台灣）", "鎖閣論壇（台灣線上平台）"):
+        return "台灣"
+    if city.startswith("日本") or "（日本）" in city or city.endswith("，日本"):
+        return "日本"
+    if city.startswith("泰國") or "（泰國）" in city:
+        return "泰國"
+    if city.startswith("越南") or "（越南）" in city:
+        return "越南"
+    if city.startswith("韓國") or "（韓國）" in city or "수원" in city:
+        return "韓國"
+    if city.startswith("菲律賓") or "（菲律賓）" in city:
+        return "菲律賓"
+    if city.startswith("印尼") or "（印尼）" in city:
+        return "印尼"
+    if city.startswith("馬來西亞") or "（馬來西亞）" in city:
+        return "馬來西亞"
+    if city.startswith("中國") or "（中國）" in city or "（中國大陸）" in city:
+        return "中國"
+    if "美國" in city or city in ("拉斯維加斯（美國）", "洛杉磯、拉斯維加斯（美國）", "洛杉磯（美國）", "美國西雅圖", "美國（多城市）"):
+        return "美國"
+    if "葡萄牙" in city:
+        return "葡萄牙"
+    if "西班牙" in city:
+        return "西班牙"
+    if "澳洲" in city:
+        return "澳洲"
+    if "柬埔寨" in city or "金邊" in city:
+        return "柬埔寨"
+    if "哥倫比亞" in city:
+        return "其他"
+    if "線上" in city or "網路" in city or "網站" in city:
+        return "台灣"
+    return "其他"
+
+
 def generate_shops():
     src = WIKI / "店家"
     files = sorted(src.glob("*.md"))
 
-    groups = defaultdict(list)
+    # city_groups: {city: [(name, svc, note), ...]}
+    city_groups = defaultdict(list)
     for f in files:
         text = f.read_text(encoding="utf-8")
         location = read_field(text, "地點") or "未知地點"
@@ -457,7 +588,13 @@ def generate_shops():
         location = normalize_location(location)
         svc = read_field(text, "服務類型") or ""
         note = first_section_line(text, "評價與特色") or first_section_line(text, "費用") or ""
-        groups[location].append((f.stem, svc, note))
+        city_groups[location].append((f.stem, svc, note))
+
+    # country_groups: {country: {city: [entries]}}
+    country_groups = defaultdict(lambda: defaultdict(list))
+    for city, entries in city_groups.items():
+        country = get_country(city)
+        country_groups[country][city].extend(entries)
 
     lines = [
         f"# 肥宅老司機 - 店家索引",
@@ -469,15 +606,24 @@ def generate_shops():
         f"---",
         f"",
     ]
-    for loc in sorted(groups):
-        entries = sorted(groups[loc], key=lambda x: x[0])
-        lines.append(f"## {loc}（{len(entries)} 家）")
+
+    all_countries = COUNTRY_ORDER + [c for c in sorted(country_groups) if c not in COUNTRY_ORDER]
+    for country in all_countries:
+        if country not in country_groups:
+            continue
+        cities = country_groups[country]
+        total = sum(len(v) for v in cities.values())
+        lines.append(f"## {country}（{total} 家）")
         lines.append(f"")
-        lines.append(f"| 店家 | 服務類型 | 評價摘要 |")
-        lines.append(f"|------|---------|---------|")
-        for name, svc, note in entries:
-            lines.append(f"| [[{name}]] | {svc} | {note} |")
-        lines.append(f"")
+        for city in sorted(cities):
+            entries = sorted(cities[city], key=lambda x: x[0])
+            lines.append(f"### {city}（{len(entries)} 家）")
+            lines.append(f"")
+            lines.append(f"| 店家 | 服務類型 | 評價摘要 |")
+            lines.append(f"|------|---------|---------|")
+            for name, svc, note in entries:
+                lines.append(f"| [[{name}]] | {svc} | {note} |")
+            lines.append(f"")
 
     lines += [
         "---",

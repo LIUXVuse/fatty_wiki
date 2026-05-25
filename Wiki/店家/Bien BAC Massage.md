@@ -18,7 +18,7 @@
 | 店名 | 費用 | 特色 |
 | :--- | :--- | :--- |
 | Bien BAC Massage | 300 萬 VND（含 Nuru） | 賭場對面，現場排隊選妃，顏值高 |
-| [[MASAGE SAKURA]] | 150 萬/40min，235 萬/60min（Nuru） | 數值不錯，武鬥派風格 |
+| [[Massage Sakura]] | 150 萬/40min，235 萬/60min（Nuru） | 數值不錯，武鬥派風格 |
 | [[D-A-O-X-A-N-H-K-T-V]] | 120–150 萬 VND（坐檯） | KTV，18–24 歲，服裝透明 |
 
 ## 實用技巧

@@ -19,7 +19,7 @@
 | **H Club Jakarta**（本店）| 大型夜店 | — | Dress Code 嚴，需長褲 |
 | [[Mario]] | KTV/陪酒/裸舞 | Lady Drink 5杯 600 TWD；全套 7,000 TWD | H奶紅牌，可體驗高強度磨蹭 |
 | [[酒吧街]] ([[Papa Rio]])| GoGo Bar KTV | — | KTV 包廂含隱藏性愛房間與浴室 |
-| [[Classic 3P]] | 雙飛 90 分鐘 | 1,000 TWD | CP 值極高，20 歲妹子 |
+| [[Classic _ Travel (GT)]] | 雙飛 90 分鐘 | 1,000 TWD | CP 值極高，20 歲妹子 |
 
 ## 雅加達實用提醒（S3EP259）
 

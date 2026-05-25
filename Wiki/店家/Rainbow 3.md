@@ -30,8 +30,8 @@ Rainbow 3 是 Nana Plaza 區的 GoGo Bar 之一（S3EP183）：
 |------|------|------|
 | **Rainbow 3** | 直接熱情，Nana Plaza 主力 | 死魚機率高，但氣氛活躍 |
 | [[Skating]] | 妹子積極 | 節目多次提及 |
-| [[Soy Cowboy]] Baraka | 較 chill 輕鬆 | 妹子較正，適合慢逛 |
-| [[Soy Cowboy]] 蛇美 | 3,000 THB | 超擁擠夜市感，人潮多 |
+| [[Cowboy Street]] Baraka | 較 chill 輕鬆 | 妹子較正，適合慢逛 |
+| [[Cowboy Street]] 蛇美 | 3,000 THB | 超擁擠夜市感，人潮多 |
 
 ## 注意事項
 - 帶出場前須在店內結清所有費用（含修改費），無法先帶走後付款

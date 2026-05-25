@@ -1,3 +1,30 @@
+## ✅ 本次完成（2026-05-25，第二次）
+
+### 斷連結修復 + 頁面整理
+
+**刪除重複頁：**
+- `Wiki/店家/天使城 (AC).md` — 內容已整合至 `地點/天使城.md`，刪除 shop stub
+- 更新 `肥宅老司機-店家索引.md`：`[[天使城 (AC)]]` → `[[天使城]]`
+
+**修復 `地點/天使城.md`：**
+- `[[Atlantis]] / [[Doorhouse]] / [[XS]]` → `[[Atlantis, Doorhouse, XS]]`（三店合併頁）
+- `[[美人房_美人湯]]` → `[[美人湯]]`（實際頁面名稱）
+
+**修復 `地點/越南.md`：**
+- `[[KTV酒店]]` → 純文字（無此單一頁面，是一般業態泛稱）
+
+**曼谷 9 個缺頁建 stub：**
+- Maria Massage, Tara Bangkok, Kokoro Massage, Canary Massage, Psyche Dream Massage
+- Klub 25, Dubai Luxury Club, Kawaii Bar & Massage, Red Dragon
+- 全部建立 `Wiki/店家/` 最小 stub，曼谷.md 的 [[wiki links]] 現已可解析
+
+**腳本收尾：**
+- sync_episode_refs.py ✅
+- generate_category_indexes.py → 630 家店
+- update_index.py → 來源 291 | 概念 749 | 人物 414 | 店家 630 | 地點 159
+
+---
+
 ## ✅ 本次完成（2026-05-25）
 
 ### 索引全面修正：去碎片化 + 正規化
