@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>肥宅老司機 | 全球夜行品味指南</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --bg-deep: #0a0908;
+            --bg-card: #131211;
+            --bg-elevated: #1a1816;
+            --border-subtle: rgba(255, 255, 255, 0.06);
+            --border-medium: rgba(255, 255, 255, 0.1);
+            --text-primary: #e8e6e3;
+            --text-secondary: #98968f;
+            --text-tertiary: #6b6964;
+            --accent-gold: #c8a97e;
+            --accent-gold-light: #d4b896;
+            --accent-rose: #b8857a;
+            --accent-wasabi: #8a9a6b;
+            --accent-saffron: #d4a547;
+            --accent-crimson: #9b3030;
+            --radius-soft: 4px;
+            --radius-medium: 8px;
+            --radius-pill: 100px;
+            --transition-smooth: 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Noto Sans TC', -apple-system, sans-serif;
+            background-color: var(--bg-deep);
+            color: var(--text-primary);
+            line-height: 1.7;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* 多國拚色背景 - 對應各地夜生活色彩 */
+        .bg-patchwork {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none; z-index: 0;
+        }
+        .bg-patch {
+            position: absolute; border-radius: 50%; filter: blur(130px); opacity: 0.3;
+            animation: patchFloat 14s ease-in-out infinite;
+        }
+        /* 泰國 - 金色 */
+        .bg-patch-1 {
+            width: 650px; height: 650px;
+            background: radial-gradient(circle, rgba(212, 165, 71, 0.4) 0%, transparent 70%);
+            top: -12%; left: -8%; animation-delay: 0s;
+        }
+        /* 越南 - 翡翠綠 */
+        .bg-patch-2 {
+            width: 600px; height: 600px;
+            background: radial-gradient(circle, rgba(90, 130, 100, 0.35) 0%, transparent 70%);
+            top: 35%; right: -10%; animation-delay: -5s; animation-duration: 16s;
+        }
+        /* 日本 - 櫻花粉 */
+        .bg-patch-3 {
+            width: 550px; height: 550px;
+            background: radial-gradient(circle, rgba(184, 133, 122, 0.3) 0%, transparent 70%);
+            bottom: -8%; left: 20%; animation-delay: -9s; animation-duration: 18s;
+        }
+        /* 台灣 - 琥珀 */
+        .bg-patch-4 {
+            width: 500px; height: 500px;
+            background: radial-gradient(circle, rgba(196, 149, 106, 0.35) 0%, transparent 70%);
+            top: 18%; left: 35%; animation-delay: -3s; animation-duration: 13s;
+        }
+        /* 菲律賓 - 海洋藍 */
+        .bg-patch-5 {
+            width: 450px; height: 450px;
+            background: radial-gradient(circle, rgba(70, 100, 130, 0.25) 0%, transparent 70%);
+            top: 55%; left: 8%; animation-delay: -7s; animation-duration: 15s;
+        }
+        @keyframes patchFloat {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            25% { transform: translate(35px, -20px) scale(1.06); }
+            50% { transform: translate(-20px, 25px) scale(0.96); }
+            75% { transform: translate(-30px, -15px) scale(1.04); }
+        }
+
+        .bg-grain {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none; z-index: 1; opacity: 0.5;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.01'/%3E%3C/svg%3E");
+        }
+
+        .container { max-width: 1280px; margin: 0 auto; padding: 0 2.5rem; position: relative; z-index: 2; }
+
+        /* 導航 */
+        .navbar {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 1.6rem 0; border-bottom: 1px solid var(--border-subtle);
+            background: rgba(10, 9, 8, 0.5); backdrop-filter: blur(25px);
+            margin: 0 -2.5rem; padding-left: 2.5rem; padding-right: 2.5rem; position: relative; z-index: 10;
+        }
+        .logo-group { display: flex; align-items: center; gap: 0.8rem; }
+        .logo-mark {
+            width: 42px; height: 42px; border: 1.5px solid var(--accent-gold);
+            border-radius: var(--radius-soft); display: flex; align-items: center; justify-content: center;
+            color: var(--accent-gold); font-size: 0.95rem; font-weight: 400;
+            transition: all var(--transition-smooth); position: relative;
+        }
+        .logo-mark::after {
+            content: ''; position: absolute; width: 7px; height: 7px;
+            background: var(--accent-rose); border-radius: 50%; top: -3px; right: -3px; opacity: 0.85;
+        }
+        .logo-text {
+            font-family: 'Cormorant Garamond', serif; font-weight: 500;
+            font-size: 1.35rem; letter-spacing: 2.5px; color: var(--text-primary); text-transform: uppercase;
+        }
+        .logo-text span { color: var(--accent-gold); font-weight: 600; }
+        .nav-links { display: flex; gap: 2.5rem; align-items: center; list-style: none; }
+        .nav-links a {
+            color: var(--text-secondary); text-decoration: none; font-size: 0.82rem;
+            font-weight: 400; letter-spacing: 1.8px; text-transform: uppercase;
+            transition: color var(--transition-smooth); position: relative;
+        }
+        .nav-links a::after {
+            content: ''; position: absolute; bottom: -5px; left: 0; width: 0; height: 1px;
+            background: var(--accent-gold); transition: width var(--transition-smooth);
+        }
+        .nav-links a:hover { color: var(--text-primary); }
+        .nav-links a:hover::after { width: 100%; }
+        .nav-cta {
+            background: transparent; border: 1px solid var(--accent-gold);
+            color: var(--accent-gold) !important; padding: 0.5rem 1.5rem;
+            border-radius: var(--radius-pill) !important; font-weight: 500 !important;
+            letter-spacing: 2px !important; font-size: 0.78rem !important;
+            transition: all var(--transition-smooth) !important; cursor: pointer;
+            overflow: hidden; position: relative;
+        }
+        .nav-cta::after { display: none !important; }
+        .nav-cta::before {
+            content: ''; position: absolute; top: 50%; left: 50%; width: 0; height: 0;
+            background: rgba(200, 169, 126, 0.2); border-radius: 50%;
+            transform: translate(-50%, -50%); transition: width 0.6s, height 0.6s;
+        }
+        .nav-cta:hover::before { width: 300px; height: 300px; }
+        .nav-cta:hover {
+            background: var(--accent-gold) !important; color: #0a0908 !important;
+            border-color: var(--accent-gold) !important;
+            box-shadow: 0 4px 25px rgba(200, 169, 126, 0.25);
+        }
+
+        /* 英雄 */
+        .hero { padding: 5rem 0 6rem; display: flex; align-items: center; justify-content: space-between; gap: 4rem; min-height: 70vh; }
+        .hero-content { flex: 1 1 55%; max-width: 620px; }
+        .hero-eyebrow {
+            font-family: 'Cormorant Garamond', serif; font-style: italic;
+            font-size: 1.1rem; color: var(--accent-gold); letter-spacing: 4px;
+            margin-bottom: 1.5rem; font-weight: 400; display: flex; align-items: center; gap: 0.8rem;
+        }
+        .hero-eyebrow::before { content: ''; width: 30px; height: 1px; background: var(--accent-gold); opacity: 0.5; }
+        .hero h1 {
+            font-family: 'Cormorant Garamond', serif; font-size: clamp(3rem, 6vw, 5rem);
+            font-weight: 300; line-height: 1.15; color: var(--text-primary);
+            margin-bottom: 2rem; letter-spacing: -0.5px;
+        }
+        .hero h1 em { font-style: italic; color: var(--accent-gold); font-weight: 400; }
+        .hero-description {
+            font-size: 1.05rem; color: var(--text-secondary); font-weight: 300;
+            letter-spacing: 0.3px; line-height: 1.9; margin-bottom: 2.5rem; max-width: 480px;
+        }
+        .hero-description strong { color: var(--accent-gold-light); font-weight: 500; }
+        .hero-stats-row { display: flex; gap: 3.5rem; margin-bottom: 3rem; }
+        .stat-item { display: flex; flex-direction: column; position: relative; }
+        .stat-item:not(:last-child)::after {
+            content: ''; position: absolute; right: -1.75rem; top: 10%;
+            height: 60%; width: 1px; background: var(--border-subtle);
+        }
+        .stat-number { font-family: 'Cormorant Garamond', serif; font-size: 3rem; font-weight: 300; color: var(--accent-gold); line-height: 1; }
+        .stat-label { font-size: 0.72rem; color: var(--text-tertiary); letter-spacing: 1.5px; text-transform: uppercase; margin-top: 0.3rem; font-weight: 400; }
+        .hero-actions { display: flex; gap: 1.5rem; align-items: center; }
+
+        /* 按鈕 */
+        .btn {
+            display: inline-flex; align-items: center; gap: 0.6rem;
+            padding: 0.85rem 2rem; font-size: 0.78rem; font-weight: 500;
+            letter-spacing: 2px; text-transform: uppercase; text-decoration: none;
+            cursor: pointer; transition: all var(--transition-smooth);
+            font-family: 'Noto Sans TC', sans-serif; border-radius: var(--radius-pill);
+            position: relative; overflow: hidden; border: none;
+        }
+        .btn::before {
+            content: ''; position: absolute; top: 50%; left: 50%; width: 0; height: 0;
+            background: rgba(255, 255, 255, 0.1); border-radius: 50%;
+            transform: translate(-50%, -50%); transition: width 0.6s, height 0.6s; z-index: 0;
+        }
+        .btn:hover::before { width: 350px; height: 350px; }
+        .btn span, .btn i { position: relative; z-index: 1; }
+        .btn-primary {
+            background: var(--accent-gold); color: #0a0908;
+            border: 1px solid var(--accent-gold);
+            box-shadow: 0 4px 20px rgba(200, 169, 126, 0.2);
+        }
+        .btn-primary:hover {
+            background: var(--accent-gold-light); border-color: var(--accent-gold-light);
+            transform: translateY(-2px); box-shadow: 0 8px 35px rgba(200, 169, 126, 0.3);
+        }
+        .btn-secondary {
+            background: transparent; color: var(--text-primary);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .btn-secondary:hover {
+            border-color: var(--accent-gold); color: var(--accent-gold);
+            background: rgba(200, 169, 126, 0.05);
+            box-shadow: 0 4px 20px rgba(200, 169, 126, 0.1);
+        }
+
+        /* 英雄視覺 - 旋轉羅盤 */
+        .hero-visual { flex: 1 1 40%; display: flex; justify-content: center; align-items: center; }
+        .hero-emblem-wrapper { position: relative; width: 320px; height: 320px; display: flex; align-items: center; justify-content: center; }
+        .cuisine-ring {
+            position: absolute; width: 100%; height: 100%;
+            border: 1px dashed rgba(200, 169, 126, 0.25); border-radius: 50%;
+            animation: orbitSpin 30s linear infinite;
+        }
+        .cuisine-ring-2 {
+            position: absolute; width: 85%; height: 85%;
+            border: 1px solid rgba(184, 133, 122, 0.2); border-radius: 50%;
+            animation: orbitSpin 22s linear infinite reverse;
+        }
+        .cuisine-ring-3 {
+            position: absolute; width: 70%; height: 70%;
+            border: 1px dotted rgba(200, 169, 126, 0.3); border-radius: 50%;
+            animation: orbitSpin 18s linear infinite;
+        }
+        .food-icon {
+            position: absolute; font-size: 1.1rem; color: var(--accent-gold);
+            opacity: 0.7; animation: iconFloat 4s ease-in-out infinite;
+            filter: drop-shadow(0 0 6px rgba(200, 169, 126, 0.3));
+            transition: all 0.4s; cursor: default;
+        }
+        .food-icon:hover { opacity: 1; transform: scale(1.4); color: #fff; filter: drop-shadow(0 0 12px rgba(200, 169, 126, 0.7)); }
+        .food-icon-1 { top: -12px; left: 45%; animation-delay: 0s; }
+        .food-icon-2 { top: 8%; right: -5%; animation-delay: -0.5s; }
+        .food-icon-3 { top: 40%; right: -15px; animation-delay: -1s; }
+        .food-icon-4 { bottom: 5%; right: 10%; animation-delay: -1.5s; }
+        .food-icon-5 { bottom: -10px; left: 42%; animation-delay: -2s; }
+        .food-icon-6 { bottom: 8%; left: 0%; animation-delay: -2.5s; }
+        .food-icon-7 { top: 35%; left: -15px; animation-delay: -3s; }
+        .food-icon-8 { top: 5%; left: 10%; animation-delay: -3.5s; }
+        @keyframes iconFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-6px); }
+        }
+        @keyframes orbitSpin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .hero-emblem {
+            width: 150px; height: 150px; border: 2px solid var(--accent-gold);
+            border-radius: var(--radius-medium); display: flex; align-items: center; justify-content: center;
+            position: relative; z-index: 3; transform: rotate(45deg);
+            background: radial-gradient(circle at center, rgba(200, 169, 126, 0.08) 0%, rgba(10, 9, 8, 0.85) 70%);
+            backdrop-filter: blur(12px); transition: all var(--transition-smooth);
+        }
+        .hero-emblem:hover {
+            border-color: var(--accent-gold-light);
+            box-shadow: 0 0 50px rgba(200, 169, 126, 0.2), inset 0 0 50px rgba(200, 169, 126, 0.06);
+            border-radius: var(--radius-soft);
+        }
+        .emblem-inner { transform: rotate(-45deg); display: flex; align-items: center; justify-content: center; flex-direction: column; }
+        .emblem-center-icon { font-size: 2.2rem; color: var(--accent-gold); animation: gentleGlow 3s ease-in-out infinite; }
+        .emblem-subtitle { font-family: 'Cormorant Garamond', serif; font-size: 0.5rem; letter-spacing: 3px; color: var(--accent-gold); opacity: 0.7; margin-top: 4px; text-transform: uppercase; }
+        @keyframes gentleGlow {
+            0%, 100% { opacity: 0.6; text-shadow: 0 0 10px rgba(200, 169, 126, 0.3); }
+            50% { opacity: 1; text-shadow: 0 0 25px rgba(200, 169, 126, 0.7); }
+        }
+
+        /* 分隔線 */
+        .section-divider { display: flex; align-items: center; justify-content: center; gap: 0.8rem; margin: 0 auto 3rem; opacity: 0.5; }
+        .divider-line { width: 50px; height: 1px; background: var(--accent-gold); }
+        .divider-icon { color: var(--accent-gold); font-size: 0.7rem; opacity: 0.7; }
+
+        /* 地域特色區塊 */
+        .features-section { padding: 5rem 0; position: relative; }
+        .features-section::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(ellipse at 25% 15%, rgba(212, 165, 71, 0.06) 0%, transparent 55%),
+                        radial-gradient(ellipse at 75% 85%, rgba(184, 133, 122, 0.05) 0%, transparent 55%),
+                        radial-gradient(ellipse at 60% 40%, rgba(90, 130, 100, 0.04) 0%, transparent 55%);
+            pointer-events: none; z-index: 0;
+        }
+        .section-header { text-align: center; margin-bottom: 4rem; position: relative; z-index: 1; }
+        .section-tag { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1rem; color: var(--accent-gold); letter-spacing: 4px; margin-bottom: 0.8rem; }
+        .section-title { font-family: 'Cormorant Garamond', serif; font-size: 2.8rem; font-weight: 300; color: var(--text-primary); letter-spacing: -0.5px; }
+
+        .features-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px;
+            background: var(--border-subtle); border: 1px solid var(--border-subtle);
+            position: relative; z-index: 1;
+        }
+        .feature-card {
+            background: rgba(19, 18, 17, 0.8); backdrop-filter: blur(12px);
+            padding: 3rem 2.5rem; text-align: left; transition: all var(--transition-smooth);
+            position: relative; overflow: hidden; border-left: 2px solid transparent;
+        }
+        .feature-card::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent-gold), transparent);
+            opacity: 0; transition: opacity var(--transition-smooth);
+        }
+        .feature-card:hover::before { opacity: 0.6; }
+        .feature-card:hover { background: rgba(26, 24, 22, 0.9); }
+        .feature-card:nth-child(1):hover { border-left-color: #d4a547; }
+        .feature-card:nth-child(2):hover { border-left-color: #5a8264; }
+        .feature-card:nth-child(3):hover { border-left-color: #b8857a; }
+        .feature-card:nth-child(4):hover { border-left-color: #c4956a; }
+        .feature-card:nth-child(5):hover { border-left-color: #4682b4; }
+        .feature-card:nth-child(6):hover { border-left-color: #9b3030; }
+
+        .feature-number { font-family: 'Cormorant Garamond', serif; font-size: 0.75rem; color: var(--accent-gold); letter-spacing: 4px; margin-bottom: 1.5rem; font-style: italic; display: flex; align-items: center; gap: 0.5rem; }
+        .feature-number i { font-size: 0.9rem; opacity: 0.6; }
+        .feature-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 500; margin-bottom: 1rem; color: var(--text-primary); letter-spacing: 0.5px; }
+        .feature-card p { font-size: 0.9rem; color: var(--text-secondary); font-weight: 300; line-height: 1.8; }
+        .feature-card p strong { color: var(--text-primary); font-weight: 500; }
+        .feature-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1rem; }
+        .feature-tag {
+            font-size: 0.65rem; letter-spacing: 1px; text-transform: uppercase;
+            padding: 0.2rem 0.6rem; border: 1px solid var(--border-medium);
+            border-radius: var(--radius-pill); color: var(--text-tertiary);
+            transition: all var(--transition-smooth);
+        }
+        .feature-card:hover .feature-tag {
+            border-color: rgba(200, 169, 126, 0.4);
+            color: var(--accent-gold-light);
+        }
+
+        /* 嘉賓區塊 */
+        .guests-section {
+            padding: 5rem 0; position: relative;
+            background: rgba(15, 17, 24, 0.4); backdrop-filter: blur(15px);
+            border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle);
+            margin: 3rem 0;
+        }
+        .guests-grid {
+            display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem;
+            position: relative; z-index: 1;
+        }
+        .guest-card {
+            background: rgba(19, 18, 17, 0.7); backdrop-filter: blur(10px);
+            border: 1px solid var(--border-subtle); border-radius: var(--radius-medium);
+            padding: 1.8rem; text-align: center; transition: all var(--transition-smooth);
+        }
+        .guest-card:hover {
+            border-color: var(--accent-gold);
+            background: rgba(26, 24, 22, 0.9);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(200, 169, 126, 0.1);
+        }
+        .guest-avatar {
+            width: 56px; height: 56px; border-radius: 50%;
+            border: 1.5px solid var(--accent-gold);
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 1rem; font-size: 1.3rem; color: var(--accent-gold);
+            background: rgba(200, 169, 126, 0.06);
+        }
+        .guest-card h4 {
+            font-family: 'Cormorant Garamond', serif; font-size: 1.1rem;
+            font-weight: 500; margin-bottom: 0.3rem; letter-spacing: 1px;
+        }
+        .guest-card .guest-role {
+            font-size: 0.7rem; color: var(--accent-gold); letter-spacing: 1.5px;
+            text-transform: uppercase; margin-bottom: 0.4rem;
+        }
+        .guest-card .guest-episodes {
+            font-size: 0.75rem; color: var(--text-tertiary);
+        }
+
+        /* 知識庫 */
+        .knowledge-showcase {
+            padding: 5rem 0; position: relative;
+        }
+        .knowledge-showcase::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(ellipse at 15% 50%, rgba(212, 165, 71, 0.04) 0%, transparent 50%),
+                        radial-gradient(ellipse at 85% 50%, rgba(184, 133, 122, 0.04) 0%, transparent 50%);
+            pointer-events: none;
+        }
+        .showcase-inner { display: flex; gap: 4rem; align-items: center; position: relative; z-index: 1; }
+        .showcase-text { flex: 1; }
+        .showcase-text h2 { font-family: 'Cormorant Garamond', serif; font-size: 2.5rem; font-weight: 300; letter-spacing: -0.3px; margin-bottom: 1.5rem; }
+        .showcase-text p { color: var(--text-secondary); font-weight: 300; line-height: 1.9; margin-bottom: 2rem; max-width: 480px; }
+        .showcase-text p strong { color: var(--text-primary); font-weight: 500; }
+        .showcase-metrics { display: flex; gap: 3rem; }
+        .metric { text-align: left; }
+        .metric-value { font-family: 'Cormorant Garamond', serif; font-size: 2.8rem; font-weight: 300; color: var(--accent-gold); line-height: 1; }
+        .metric-label { font-size: 0.7rem; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text-tertiary); margin-top: 0.4rem; }
+        .showcase-visual {
+            flex: 0 0 380px; background: rgba(19, 18, 17, 0.7); backdrop-filter: blur(12px);
+            border: 1px solid var(--border-subtle); padding: 2.5rem; text-align: center;
+            border-radius: var(--radius-medium); position: relative;
+        }
+        .showcase-icon-large { font-size: 3.5rem; color: var(--accent-gold); opacity: 0.5; margin-bottom: 1.5rem; }
+        .showcase-label { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; letter-spacing: 2px; color: var(--text-secondary); font-style: italic; }
+
+        /* GitHub */
+        .github-callout { padding: 4rem 0; text-align: center; position: relative; }
+        .github-card {
+            display: inline-flex; align-items: center; gap: 2rem;
+            background: rgba(19, 18, 17, 0.7); backdrop-filter: blur(12px);
+            border: 1px solid var(--border-subtle); padding: 1.8rem 2.8rem;
+            transition: all var(--transition-smooth); text-decoration: none;
+            color: var(--text-primary); border-radius: var(--radius-pill); position: relative; z-index: 1;
+        }
+        .github-card:hover {
+            border-color: var(--accent-gold); background: rgba(26, 24, 22, 0.9);
+            box-shadow: 0 4px 35px rgba(200, 169, 126, 0.1); border-radius: var(--radius-medium);
+        }
+        .github-icon { font-size: 2rem; color: var(--text-secondary); }
+        .github-info { text-align: left; }
+        .github-info h4 { font-family: 'Cormorant Garamond', serif; font-weight: 500; font-size: 1.1rem; letter-spacing: 1px; }
+        .github-info p { font-size: 0.8rem; color: var(--text-tertiary); letter-spacing: 0.5px; margin-top: 0.2rem; }
+
+        /* 頁尾 */
+        .footer {
+            border-top: 1px solid var(--border-subtle); padding: 2.5rem 0; text-align: center;
+            position: relative; background: rgba(10, 9, 8, 0.5); backdrop-filter: blur(12px);
+        }
+        .footer-text { font-size: 0.78rem; color: var(--text-tertiary); letter-spacing: 1.5px; font-weight: 300; }
+        .footer-text span { color: var(--accent-gold); }
+        .footer-disclaimer {
+            font-size: 0.65rem; color: var(--text-tertiary); opacity: 0.6;
+            margin-top: 0.6rem; letter-spacing: 0.5px;
+        }
+
+        /* 響應式 */
+        @media (max-width: 1024px) {
+            .features-grid { grid-template-columns: repeat(2, 1fr); }
+            .guests-grid { grid-template-columns: repeat(2, 1fr); }
+            .hero { flex-direction: column; text-align: center; padding: 3rem 0 4rem; gap: 2.5rem; min-height: auto; }
+            .hero-content { max-width: 100%; }
+            .hero-description { max-width: 100%; margin: 0 auto 2rem; }
+            .hero-eyebrow { justify-content: center; }
+            .hero-stats-row { justify-content: center; }
+            .hero-actions { justify-content: center; }
+            .showcase-inner { flex-direction: column; text-align: center; }
+            .showcase-text p { max-width: 100%; margin: 0 auto 2rem; }
+            .showcase-metrics { justify-content: center; }
+            .showcase-visual { flex: 0 0 auto; width: 100%; max-width: 380px; }
+            .hero-emblem-wrapper { width: 260px; height: 260px; }
+            .hero-emblem { width: 120px; height: 120px; }
+            .emblem-center-icon { font-size: 1.8rem; }
+        }
+        @media (max-width: 768px) {
+            .container { padding: 0 1.5rem; }
+            .nav-links { gap: 1rem; }
+            .nav-links a { font-size: 0.68rem; }
+            .features-grid { grid-template-columns: 1fr; }
+            .guests-grid { grid-template-columns: 1fr 1fr; }
+            .hero-stats-row { gap: 1.8rem; }
+            .stat-number { font-size: 2rem; }
+            .stat-item:not(:last-child)::after { right: -0.9rem; }
+            .hero h1 { font-size: 2.4rem; }
+            .section-title { font-size: 2rem; }
+            .hero-emblem-wrapper { width: 220px; height: 220px; }
+            .hero-emblem { width: 100px; height: 100px; }
+            .emblem-center-icon { font-size: 1.5rem; }
+            .showcase-metrics { gap: 1.8rem; }
+            .metric-value { font-size: 2rem; }
+            .github-card { flex-direction: column; text-align: center; padding: 1.5rem 2rem; border-radius: var(--radius-medium); }
+            .github-info { text-align: center; }
+            .btn { padding: 0.7rem 1.5rem; font-size: 0.7rem; }
+            .navbar { margin: 0 -1.5rem; padding-left: 1.5rem; padding-right: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-patchwork">
+        <div class="bg-patch bg-patch-1"></div>
+        <div class="bg-patch bg-patch-2"></div>
+        <div class="bg-patch bg-patch-3"></div>
+        <div class="bg-patch bg-patch-4"></div>
+        <div class="bg-patch bg-patch-5"></div>
+    </div>
+    <div class="bg-grain"></div>
+
+    <div class="container">
+        <nav class="navbar">
+            <div class="logo-group">
+                <div class="logo-mark">肥</div>
+                <div class="logo-text">老<span>司機</span></div>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#features">地域</a></li>
+                <li><a href="#guests">嘉賓</a></li>
+                <li><a href="#knowledge">典藏</a></li>
+                <li><a href="https://open.spotify.com/show/1TVCbnnpv0QIuPo9LZWcGi" target="_blank" class="nav-cta">收聽節目</a></li>
+            </ul>
+        </nav>
+
+        <section class="hero">
+            <div class="hero-content">
+                <p class="hero-eyebrow">— 環球夜行 · 老司機領路 —</p>
+                <h1>
+                    全球<em>夜生活</em><br>品味指南
+                </h1>
+                <p class="hero-description">
+                    從<strong>曼谷 GoGo Bar</strong> 到 <strong>東京泡泡浴</strong>，從<strong>胡志明 KTV</strong> 到 <strong>台中豆干厝</strong>。
+                    257 集實戰經驗，<strong>喇賽、老張、克里斯</strong> 等 414 位嘉賓共同淬煉，
+                    一套完整的 <strong>成人娛樂知識庫</strong>，為懂得生活的你量身打造。
+                </p>
+                <div class="hero-stats-row">
+                    <div class="stat-item">
+                        <span class="stat-number">257+</span>
+                        <span class="stat-label">集數典藏</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">633</span>
+                        <span class="stat-label">收錄店家</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">166</span>
+                        <span class="stat-label">城市指南</span>
+                    </div>
+                </div>
+                <div class="hero-actions">
+                    <a href="https://open.spotify.com/show/1TVCbnnpv0QIuPo9LZWcGi" target="_blank" class="btn btn-primary">
+                        <span>入席聆聽</span> <i class="fas fa-arrow-right"></i>
+                    </a>
+                    <a href="#knowledge" class="btn btn-secondary">
+                        <span>探索典藏</span> <i class="fas fa-compass"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="hero-emblem-wrapper">
+                    <div class="cuisine-ring"></div>
+                    <div class="cuisine-ring-2"></div>
+                    <div class="cuisine-ring-3"></div>
+                    <span class="food-icon food-icon-1" title="曼谷">🏯</span>
+                    <span class="food-icon food-icon-2" title="胡志明">🇻🇳</span>
+                    <span class="food-icon food-icon-3" title="東京">🗼</span>
+                    <span class="food-icon food-icon-4" title="芭提雅">🏖️</span>
+                    <span class="food-icon food-icon-5" title="台北">🏙️</span>
+                    <span class="food-icon food-icon-6" title="馬尼拉">🌴</span>
+                    <span class="food-icon food-icon-7" title="大阪">🏯</span>
+                    <span class="food-icon food-icon-8" title="雅加達">🌆</span>
+                    <div class="hero-emblem">
+                        <div class="emblem-inner">
+                            <i class="fas fa-compass emblem-center-icon"></i>
+                            <span class="emblem-subtitle">Explore</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- 地域特色 -->
+    <section class="features-section" id="features">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-tag">— 地域導航 —</p>
+                <h2 class="section-title">六大探索區域</h2>
+            </div>
+            <div class="section-divider">
+                <span class="divider-line"></span>
+                <i class="fas fa-globe-asia divider-icon"></i>
+                <span class="divider-line"></span>
+            </div>
+            <div class="features-grid">
+                <a href="bangkok.html" style="text-decoration:none;color:inherit;display:block;">
+                <div class="feature-card" style="cursor:pointer;">
+                    <p class="feature-number"><i class="fas fa-torii-gate"></i> 01 · 泰國</p>
+                    <h3>曼谷 · 芭提雅</h3>
+                    <p><strong>GoGo Bar</strong>、<strong>泰浴</strong>、<strong>日按</strong>、蛇美咖啡、Gentleman's Club。從 <strong>Walking Street</strong> 到 <strong>六巷</strong>，最完整的泰國暗黑地圖。</p>
+                    <div class="feature-tags">
+                        <span class="feature-tag">曼谷</span>
+                        <span class="feature-tag">芭提雅</span>
+                        <span class="feature-tag">GoGo Bar</span>
+                        <span class="feature-tag">泰浴</span>
+                    </div>
+                    <div style="margin-top:1rem;font-size:0.7rem;color:var(--accent-gold);letter-spacing:1px;display:flex;align-items:center;gap:0.4rem;">
+                        <i class="fas fa-arrow-right"></i> 點擊進入曼谷專頁
+                    </div>
+                </div>
+                </a>
+                <div class="feature-card">
+                    <p class="feature-number"><i class="fas fa-star"></i> 02 · 越南</p>
+                    <h3>胡志明 · 河內</h3>
+                    <p><strong>KTV</strong>、<strong>殘廢浴</strong>、洗頭店、奧黛旗袍、<strong>富都</strong>。越南是台幹應酬聖地，也是 CP 值最高的探索區域。</p>
+                    <div class="feature-tags">
+                        <span class="feature-tag">胡志明</span>
+                        <span class="feature-tag">河內</span>
+                        <span class="feature-tag">KTV</span>
+                        <span class="feature-tag">富都</span>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <p class="feature-number"><i class="fas fa-water"></i> 03 · 日本</p>
+                    <h3>東京 · 大阪</h3>
+                    <p><strong>泡泡浴</strong>、風俗業、<strong>松島新地</strong>。老馬哥帶路，深入日本成人娛樂的文化底蘊與極致服務。</p>
+                    <div class="feature-tags">
+                        <span class="feature-tag">東京</span>
+                        <span class="feature-tag">大阪</span>
+                        <span class="feature-tag">泡泡浴</span>
+                        <span class="feature-tag">松島</span>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <p class="feature-number"><i class="fas fa-home"></i> 04 · 台灣</p>
+                    <h3>台中 · 高雄 · 台北</h3>
+                    <p><strong>豆干厝</strong>、點三店、<strong>龍筋按摩</strong>、民電、<strong>烏日麗金</strong>。本土老司機的私房地圖，巷仔內才知道。</p>
+                    <div class="feature-tags">
+                        <span class="feature-tag">台中</span>
+                        <span class="feature-tag">高雄</span>
+                        <span class="feature-tag">台北</span>
+                        <span class="feature-tag">豆干厝</span>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <p class="feature-number"><i class="fas fa-umbrella-beach"></i> 05 · 菲律賓/印尼</p>
+                    <h3>馬尼拉 · 雅加達</h3>
+                    <p><strong>天使城</strong>、PG 島、<strong>宿霧</strong>海島玩法。東南亞新興探索區域，性價比與體驗的完美平衡。</p>
+                    <div class="feature-tags">
+                        <span class="feature-tag">馬尼拉</span>
+                        <span class="feature-tag">雅加達</span>
+                        <span class="feature-tag">宿霧</span>
+                        <span class="feature-tag">天使城</span>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <p class="feature-number"><i class="fas fa-globe-europe"></i> 06 · 歐美/墨西哥</p>
+                    <h3>FKK · Tijuana · 多倫多</h3>
+                    <p>歐洲 <strong>FKK</strong>、墨西哥 <strong>Tijuana</strong>、美國與加拿大。跨洲際探索，<strong>詹姆士</strong>與<strong>比爾</strong>帶你開拓視野。</p>
+                    <div class="feature-tags">
+                        <span class="feature-tag">FKK</span>
+                        <span class="feature-tag">Tijuana</span>
+                        <span class="feature-tag">多倫多</span>
+                        <span class="feature-tag">歐洲</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 嘉賓區塊 -->
+    <section class="guests-section" id="guests">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-tag">— 常駐領路人 —</p>
+                <h2 class="section-title">核心嘉賓群</h2>
+            </div>
+            <div class="section-divider">
+                <span class="divider-line"></span>
+                <i class="fas fa-users divider-icon"></i>
+                <span class="divider-line"></span>
+            </div>
+            <div class="guests-grid">
+                <div class="guest-card">
+                    <div class="guest-avatar"><i class="fas fa-crown"></i></div>
+                    <h4>喇賽</h4>
+                    <p class="guest-role">首席探店專家</p>
+                    <p class="guest-episodes">34 集 · 按摩保養 · 泰國/菲律賓</p>
+                </div>
+                <div class="guest-card">
+                    <div class="guest-avatar"><i class="fas fa-plane"></i></div>
+                    <h4>老張</h4>
+                    <p class="guest-role">越南/日本達人</p>
+                    <p class="guest-episodes">31 集 · 胡志明 KTV · 東京泡泡浴</p>
+                </div>
+                <div class="guest-card">
+                    <div class="guest-avatar"><i class="fas fa-heart"></i></div>
+                    <h4>克里斯</h4>
+                    <p class="guest-role">包養網實戰家</p>
+                    <p class="guest-episodes">21 集 · 線上到線下操作</p>
+                </div>
+                <div class="guest-card">
+                    <div class="guest-avatar"><i class="fas fa-moon"></i></div>
+                    <h4>藍甲蟲</h4>
+                    <p class="guest-role">台灣夜生活通</p>
+                    <p class="guest-episodes">21 集 · 包養文化 · 團康遊戲</p>
+                </div>
+                <div class="guest-card">
+                    <div class="guest-avatar"><i class="fas fa-female"></i></div>
+                    <h4>小茜</h4>
+                    <p class="guest-role">女性視角來賓</p>
+                    <p class="guest-episodes">17 集 · 外送茶 · 約炮心得</p>
+                </div>
+                <div class="guest-card">
+                    <div class="guest-avatar"><i class="fas fa-shield-alt"></i></div>
+                    <h4>Beast</h4>
+                    <p class="guest-role">豆干厝專家</p>
+                    <p class="guest-episodes">16 集 · 包養網 · 台灣踩點</p>
+                </div>
+                <div class="guest-card">
+                    <div class="guest-avatar"><i class="fas fa-wine-glass-alt"></i></div>
+                    <h4>比爾</h4>
+                    <p class="guest-role">歐洲 FKK 嚮導</p>
+                    <p class="guest-episodes">14 集 · 日本泡泡浴 · 跨洲經驗</p>
+                </div>
+                <div class="guest-card">
+                    <div class="guest-avatar"><i class="fas fa-dice"></i></div>
+                    <h4>基德</h4>
+                    <p class="guest-role">不花錢獵色高手</p>
+                    <p class="guest-episodes">13 集 · 3P 實戰 · 免費攻略</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 知識庫亮點 -->
+    <section class="knowledge-showcase" id="knowledge">
+        <div class="container">
+            <div class="showcase-inner">
+                <div class="showcase-text">
+                    <p class="section-tag" style="text-align:left;">— 典藏館 —</p>
+                    <h2>肥宅 Wiki<br>你的全球夜行指南</h2>
+                    <p>
+                        257 集 Podcast + 34 個主題專輯 + <strong>7 份完整旅遊指南</strong>。
+                        涵蓋 <strong>749 個行話術語</strong>、<strong>414 位相關人物</strong>、<strong>633 間店家</strong>、
+                        <strong>166 個城市地點</strong>。用 Obsidian 瀏覽知識圖譜，一目了然。
+                    </p>
+                    <div class="showcase-metrics">
+                        <div class="metric">
+                            <span class="metric-value">749</span>
+                            <span class="metric-label">行話術語</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-value">414</span>
+                            <span class="metric-label">相關人物</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-value">633</span>
+                            <span class="metric-label">收錄店家</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="showcase-visual">
+                    <i class="fas fa-project-diagram showcase-icon-large"></i>
+                    <p class="showcase-label">AI 知識圖譜</p>
+                    <p style="font-size:0.8rem;color:var(--text-tertiary);margin-top:0.8rem;">
+                        Obsidian · Claude Code · Ollama<br>
+                        基於 Andrej Karpathy 方法
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- GitHub 區塊 -->
+    <section class="github-callout" id="github">
+        <div class="container">
+            <p class="section-tag">— 開放原始碼 —</p>
+            <h2 class="section-title" style="margin-bottom:2rem;">技術底蘊</h2>
+            <div class="section-divider">
+                <span class="divider-line"></span>
+                <i class="fas fa-code divider-icon"></i>
+                <span class="divider-line"></span>
+            </div>
+            <a href="https://github.com/LIUXVuse/fatty_wiki" target="_blank" class="github-card">
+                <i class="fab fa-github github-icon"></i>
+                <div class="github-info">
+                    <h4>LIUXVuse / fatty_wiki</h4>
+                    <p>個人 AI 知識庫 · 42 commits · 持續更新中</p>
+                </div>
+                <i class="fas fa-external-link-alt" style="color:var(--text-tertiary);font-size:0.8rem;"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- 頁尾 -->
+    <footer class="footer">
+        <div class="container">
+            <p class="footer-text">
+                © 2026 <span>肥宅老司機</span> · 由 Claude × Ollama × 波尼 偕同整理
+            </p>
+            <p class="footer-disclaimer">
+                ⚠ 本知識庫由腳本整理，絕對有錯誤，娛樂看待 🙏
+            </p>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>曼谷 | 肥宅老司機 · 全球夜行品味指南</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --bg-deep: #0a0908;
+            --bg-card: #131211;
+            --bg-elevated: #1a1816;
+            --border-subtle: rgba(255, 255, 255, 0.06);
+            --border-medium: rgba(255, 255, 255, 0.1);
+            --text-primary: #e8e6e3;
+            --text-secondary: #98968f;
+            --text-tertiary: #6b6964;
+            --accent-gold: #c8a97e;
+            --accent-gold-light: #d4b896;
+            --accent-rose: #b8857a;
+            --accent-wasabi: #8a9a6b;
+            --accent-saffron: #d4a547;
+            --accent-crimson: #9b3030;
+            --radius-soft: 4px;
+            --radius-medium: 8px;
+            --radius-pill: 100px;
+            --transition-smooth: 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Noto Sans TC', -apple-system, sans-serif;
+            background-color: var(--bg-deep);
+            color: var(--text-primary);
+            line-height: 1.7;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .bg-patchwork {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none; z-index: 0;
+        }
+        .bg-patch {
+            position: absolute; border-radius: 50%; filter: blur(130px); opacity: 0.3;
+            animation: patchFloat 14s ease-in-out infinite;
+        }
+        .bg-patch-1 {
+            width: 650px; height: 650px;
+            background: radial-gradient(circle, rgba(212, 165, 71, 0.4) 0%, transparent 70%);
+            top: -12%; left: -8%;
+        }
+        .bg-patch-2 {
+            width: 500px; height: 500px;
+            background: radial-gradient(circle, rgba(184, 133, 122, 0.3) 0%, transparent 70%);
+            bottom: 25%; right: -10%; animation-delay: -5s; animation-duration: 16s;
+        }
+        .bg-patch-3 {
+            width: 550px; height: 550px;
+            background: radial-gradient(circle, rgba(200, 169, 126, 0.3) 0%, transparent 70%);
+            top: 40%; left: 30%; animation-delay: -9s; animation-duration: 18s;
+        }
+        .bg-patch-4 {
+            width: 400px; height: 400px;
+            background: radial-gradient(circle, rgba(90, 130, 100, 0.2) 0%, transparent 70%);
+            top: 60%; left: 5%; animation-delay: -3s; animation-duration: 13s;
+        }
+        @keyframes patchFloat {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            25% { transform: translate(35px, -20px) scale(1.06); }
+            50% { transform: translate(-20px, 25px) scale(0.96); }
+            75% { transform: translate(-30px, -15px) scale(1.04); }
+        }
+
+        .bg-grain {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none; z-index: 1; opacity: 0.5;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.01'/%3E%3C/svg%3E");
+        }
+
+        .container { max-width: 1280px; margin: 0 auto; padding: 0 2.5rem; position: relative; z-index: 2; }
+
+        .navbar {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 1.6rem 0; border-bottom: 1px solid var(--border-subtle);
+            background: rgba(10, 9, 8, 0.5); backdrop-filter: blur(25px);
+            margin: 0 -2.5rem; padding-left: 2.5rem; padding-right: 2.5rem; position: relative; z-index: 10;
+        }
+        .logo-group { display: flex; align-items: center; gap: 0.8rem; }
+        .logo-mark {
+            width: 42px; height: 42px; border: 1.5px solid var(--accent-gold);
+            border-radius: var(--radius-soft); display: flex; align-items: center; justify-content: center;
+            color: var(--accent-gold); font-size: 0.95rem; font-weight: 400;
+            transition: all var(--transition-smooth); position: relative; text-decoration: none;
+        }
+        .logo-mark::after {
+            content: ''; position: absolute; width: 7px; height: 7px;
+            background: var(--accent-rose); border-radius: 50%; top: -3px; right: -3px; opacity: 0.85;
+        }
+        .logo-text {
+            font-family: 'Cormorant Garamond', serif; font-weight: 500;
+            font-size: 1.35rem; letter-spacing: 2.5px; color: var(--text-primary); text-transform: uppercase;
+        }
+        .logo-text span { color: var(--accent-gold); font-weight: 600; }
+        .nav-links { display: flex; gap: 2.5rem; align-items: center; list-style: none; }
+        .nav-links a {
+            color: var(--text-secondary); text-decoration: none; font-size: 0.82rem;
+            font-weight: 400; letter-spacing: 1.8px; text-transform: uppercase;
+            transition: color var(--transition-smooth); position: relative;
+        }
+        .nav-links a::after {
+            content: ''; position: absolute; bottom: -5px; left: 0; width: 0; height: 1px;
+            background: var(--accent-gold); transition: width var(--transition-smooth);
+        }
+        .nav-links a:hover { color: var(--text-primary); }
+        .nav-links a:hover::after { width: 100%; }
+        .nav-cta {
+            background: transparent; border: 1px solid var(--accent-gold);
+            color: var(--accent-gold) !important; padding: 0.5rem 1.5rem;
+            border-radius: var(--radius-pill) !important; font-weight: 500 !important;
+            letter-spacing: 2px !important; font-size: 0.78rem !important;
+            transition: all var(--transition-smooth) !important; cursor: pointer;
+            overflow: hidden; position: relative;
+        }
+        .nav-cta::after { display: none !important; }
+        .nav-cta::before {
+            content: ''; position: absolute; top: 50%; left: 50%; width: 0; height: 0;
+            background: rgba(200, 169, 126, 0.2); border-radius: 50%;
+            transform: translate(-50%, -50%); transition: width 0.6s, height 0.6s;
+        }
+        .nav-cta:hover::before { width: 300px; height: 300px; }
+        .nav-cta:hover {
+            background: var(--accent-gold) !important; color: #0a0908 !important;
+            border-color: var(--accent-gold) !important;
+            box-shadow: 0 4px 25px rgba(200, 169, 126, 0.25);
+        }
+
+        .hero {
+            padding: 4rem 0 5rem; display: flex; align-items: center; justify-content: space-between;
+            gap: 4rem; min-height: 60vh;
+        }
+        .hero-content { flex: 1 1 55%; max-width: 620px; }
+        .hero-eyebrow {
+            font-family: 'Cormorant Garamond', serif; font-style: italic;
+            font-size: 1.1rem; color: var(--accent-gold); letter-spacing: 4px;
+            margin-bottom: 1.5rem; font-weight: 400; display: flex; align-items: center; gap: 0.8rem;
+        }
+        .hero-eyebrow::before { content: ''; width: 30px; height: 1px; background: var(--accent-gold); opacity: 0.5; }
+        .hero h1 {
+            font-family: 'Cormorant Garamond', serif; font-size: clamp(2.8rem, 5vw, 4.2rem);
+            font-weight: 300; line-height: 1.15; color: var(--text-primary);
+            margin-bottom: 1.5rem; letter-spacing: -0.5px;
+        }
+        .hero h1 em { font-style: italic; color: var(--accent-gold); font-weight: 400; }
+        .hero-description {
+            font-size: 1rem; color: var(--text-secondary); font-weight: 300;
+            letter-spacing: 0.3px; line-height: 1.9; margin-bottom: 2rem; max-width: 500px;
+        }
+        .hero-description strong { color: var(--accent-gold-light); font-weight: 500; }
+        .hero-stats-row { display: flex; gap: 3rem; margin-bottom: 2.5rem; flex-wrap: wrap; }
+        .stat-item { display: flex; flex-direction: column; position: relative; }
+        .stat-item:not(:last-child)::after {
+            content: ''; position: absolute; right: -1.5rem; top: 10%;
+            height: 60%; width: 1px; background: var(--border-subtle);
+        }
+        .stat-number { font-family: 'Cormorant Garamond', serif; font-size: 2.8rem; font-weight: 300; color: var(--accent-gold); line-height: 1; }
+        .stat-label { font-size: 0.72rem; color: var(--text-tertiary); letter-spacing: 1.5px; text-transform: uppercase; margin-top: 0.3rem; font-weight: 400; }
+        .hero-actions { display: flex; gap: 1.5rem; align-items: center; flex-wrap: wrap; }
+
+        .btn {
+            display: inline-flex; align-items: center; gap: 0.6rem;
+            padding: 0.85rem 2rem; font-size: 0.78rem; font-weight: 500;
+            letter-spacing: 2px; text-transform: uppercase; text-decoration: none;
+            cursor: pointer; transition: all var(--transition-smooth);
+            font-family: 'Noto Sans TC', sans-serif; border-radius: var(--radius-pill);
+            position: relative; overflow: hidden; border: none;
+        }
+        .btn::before {
+            content: ''; position: absolute; top: 50%; left: 50%; width: 0; height: 0;
+            background: rgba(255, 255, 255, 0.1); border-radius: 50%;
+            transform: translate(-50%, -50%); transition: width 0.6s, height 0.6s; z-index: 0;
+        }
+        .btn:hover::before { width: 350px; height: 350px; }
+        .btn span, .btn i { position: relative; z-index: 1; }
+        .btn-primary {
+            background: var(--accent-gold); color: #0a0908;
+            border: 1px solid var(--accent-gold);
+            box-shadow: 0 4px 20px rgba(200, 169, 126, 0.2);
+        }
+        .btn-primary:hover {
+            background: var(--accent-gold-light); border-color: var(--accent-gold-light);
+            transform: translateY(-2px); box-shadow: 0 8px 35px rgba(200, 169, 126, 0.3);
+        }
+        .btn-secondary {
+            background: transparent; color: var(--text-primary);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .btn-secondary:hover {
+            border-color: var(--accent-gold); color: var(--accent-gold);
+            background: rgba(200, 169, 126, 0.05);
+            box-shadow: 0 4px 20px rgba(200, 169, 126, 0.1);
+        }
+
+        .hero-visual { flex: 1 1 40%; display: flex; justify-content: center; align-items: center; }
+        .hero-emblem-wrapper { position: relative; width: 300px; height: 300px; display: flex; align-items: center; justify-content: center; }
+        .cuisine-ring {
+            position: absolute; width: 100%; height: 100%;
+            border: 1px dashed rgba(200, 169, 126, 0.25); border-radius: 50%;
+            animation: orbitSpin 30s linear infinite;
+        }
+        .cuisine-ring-2 {
+            position: absolute; width: 85%; height: 85%;
+            border: 1px solid rgba(184, 133, 122, 0.2); border-radius: 50%;
+            animation: orbitSpin 22s linear infinite reverse;
+        }
+        .cuisine-ring-3 {
+            position: absolute; width: 70%; height: 70%;
+            border: 1px dotted rgba(200, 169, 126, 0.3); border-radius: 50%;
+            animation: orbitSpin 18s linear infinite;
+        }
+        .hero-emblem {
+            width: 140px; height: 140px; border: 2px solid var(--accent-gold);
+            border-radius: var(--radius-medium); display: flex; align-items: center; justify-content: center;
+            position: relative; z-index: 3; transform: rotate(45deg);
+            background: radial-gradient(circle at center, rgba(200, 169, 126, 0.08) 0%, rgba(10, 9, 8, 0.85) 70%);
+            backdrop-filter: blur(12px); transition: all var(--transition-smooth);
+        }
+        .hero-emblem:hover {
+            border-color: var(--accent-gold-light);
+            box-shadow: 0 0 50px rgba(200, 169, 126, 0.2), inset 0 0 50px rgba(200, 169, 126, 0.06);
+        }
+        .emblem-inner { transform: rotate(-45deg); display: flex; align-items: center; justify-content: center; flex-direction: column; }
+        .emblem-center-icon { font-size: 2.4rem; color: var(--accent-gold); animation: gentleGlow 3s ease-in-out infinite; }
+        .emblem-subtitle { font-family: 'Cormorant Garamond', serif; font-size: 0.5rem; letter-spacing: 3px; color: var(--accent-gold); opacity: 0.7; margin-top: 4px; text-transform: uppercase; }
+        @keyframes gentleGlow {
+            0%, 100% { opacity: 0.6; text-shadow: 0 0 10px rgba(200, 169, 126, 0.3); }
+            50% { opacity: 1; text-shadow: 0 0 25px rgba(200, 169, 126, 0.7); }
+        }
+        @keyframes orbitSpin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .section-divider { display: flex; align-items: center; justify-content: center; gap: 0.8rem; margin: 0 auto 3rem; opacity: 0.5; }
+        .divider-line { width: 50px; height: 1px; background: var(--accent-gold); }
+        .divider-icon { color: var(--accent-gold); font-size: 0.7rem; opacity: 0.7; }
+
+        .section {
+            padding: 5rem 0; position: relative;
+        }
+        .section::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(ellipse at 25% 15%, rgba(212, 165, 71, 0.06) 0%, transparent 55%),
+                        radial-gradient(ellipse at 75% 85%, rgba(184, 133, 122, 0.05) 0%, transparent 55%);
+            pointer-events: none; z-index: 0;
+        }
+        .section-alt {
+            padding: 5rem 0; position: relative;
+            background: rgba(15, 17, 24, 0.3); backdrop-filter: blur(15px);
+            border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle);
+            margin: 2rem 0;
+        }
+        .section-header { text-align: center; margin-bottom: 3.5rem; position: relative; z-index: 1; }
+        .section-tag { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1rem; color: var(--accent-gold); letter-spacing: 4px; margin-bottom: 0.8rem; }
+        .section-title { font-family: 'Cormorant Garamond', serif; font-size: 2.6rem; font-weight: 300; color: var(--text-primary); letter-spacing: -0.5px; }
+
+        .content-card {
+            background: rgba(19, 18, 17, 0.8); backdrop-filter: blur(12px);
+            border: 1px solid var(--border-subtle); border-radius: var(--radius-medium);
+            padding: 2.5rem; margin-bottom: 2rem; position: relative; z-index: 1;
+            transition: all var(--transition-smooth);
+        }
+        .content-card:hover {
+            border-color: rgba(200, 169, 126, 0.3);
+            background: rgba(26, 24, 22, 0.85);
+        }
+        .content-card h3 {
+            font-family: 'Cormorant Garamond', serif; font-size: 1.5rem;
+            font-weight: 500; margin-bottom: 1.2rem; color: var(--accent-gold);
+            display: flex; align-items: center; gap: 0.8rem;
+        }
+        .content-card h3 i { font-size: 1.2rem; opacity: 0.7; }
+        .content-card h4 {
+            font-family: 'Cormorant Garamond', serif; font-size: 1.1rem;
+            font-weight: 500; color: var(--text-primary); margin-bottom: 0.8rem; margin-top: 1.5rem;
+        }
+        .content-card h4:first-of-type { margin-top: 0; }
+        .content-card p { font-size: 0.9rem; color: var(--text-secondary); font-weight: 300; line-height: 1.8; margin-bottom: 0.8rem; }
+        .content-card p strong { color: var(--text-primary); font-weight: 500; }
+        .content-card .highlight { color: var(--accent-gold-light); }
+
+        .store-table {
+            width: 100%; border-collapse: collapse; margin: 1rem 0;
+            font-size: 0.85rem; border: 1px solid var(--border-subtle);
+        }
+        .store-table th {
+            background: rgba(26, 24, 22, 0.8); color: var(--accent-gold);
+            font-weight: 500; padding: 0.7rem 1rem; text-align: left;
+            font-size: 0.75rem; letter-spacing: 1.5px; text-transform: uppercase;
+            border-bottom: 1px solid var(--border-medium);
+        }
+        .store-table td {
+            padding: 0.7rem 1rem; border-bottom: 1px solid var(--border-subtle);
+            color: var(--text-secondary); font-weight: 300;
+        }
+        .store-table tr:hover td { background: rgba(200, 169, 126, 0.04); }
+        .store-table .price { color: var(--accent-gold); font-weight: 500; white-space: nowrap; }
+        .store-table .warn { color: var(--accent-crimson); }
+        .store-table .tag {
+            display: inline-block; font-size: 0.6rem; letter-spacing: 1px;
+            padding: 0.15rem 0.5rem; border: 1px solid var(--border-medium);
+            border-radius: var(--radius-pill); color: var(--text-tertiary);
+            margin-right: 0.2rem; margin-bottom: 0.2rem;
+        }
+
+        .tip-grid {
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1rem; margin-top: 1rem;
+        }
+        .tip-card {
+            background: rgba(19, 18, 17, 0.6); backdrop-filter: blur(8px);
+            border: 1px solid var(--border-subtle); border-radius: var(--radius-soft);
+            padding: 1.2rem 1.5rem; transition: all var(--transition-smooth);
+        }
+        .tip-card:hover {
+            border-color: rgba(200, 169, 126, 0.3);
+            transform: translateY(-2px);
+        }
+        .tip-card .tip-label {
+            font-size: 0.65rem; color: var(--accent-gold); letter-spacing: 2px;
+            text-transform: uppercase; font-weight: 500; margin-bottom: 0.3rem;
+        }
+        .tip-card p { font-size: 0.85rem; color: var(--text-secondary); font-weight: 300; margin: 0; }
+        .tip-card p strong { color: var(--text-primary); }
+
+        .sub-section-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem; font-weight: 500; color: var(--text-primary);
+            margin: 2rem 0 1.2rem; padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border-subtle);
+            display: flex; align-items: center; gap: 0.6rem;
+        }
+        .sub-section-title i { color: var(--accent-gold); font-size: 1rem; opacity: 0.7; }
+
+        .highlight-block {
+            background: rgba(200, 169, 126, 0.06);
+            border-left: 2px solid var(--accent-gold);
+            padding: 1.5rem 2rem; margin: 1rem 0;
+            border-radius: 0 var(--radius-soft) var(--radius-soft) 0;
+        }
+        .highlight-block p { margin-bottom: 0.3rem; color: var(--text-secondary); }
+        .highlight-block p:last-child { margin-bottom: 0; }
+        .highlight-block .quote {
+            font-family: 'Cormorant Garamond', serif; font-style: italic;
+            font-size: 1.05rem; color: var(--accent-gold-light);
+        }
+
+        .footer {
+            border-top: 1px solid var(--border-subtle); padding: 2.5rem 0; text-align: center;
+            position: relative; background: rgba(10, 9, 8, 0.5); backdrop-filter: blur(12px);
+        }
+        .footer-text { font-size: 0.78rem; color: var(--text-tertiary); letter-spacing: 1.5px; font-weight: 300; }
+        .footer-text span { color: var(--accent-gold); }
+        .footer-disclaimer {
+            font-size: 0.65rem; color: var(--text-tertiary); opacity: 0.6;
+            margin-top: 0.6rem; letter-spacing: 0.5px;
+        }
+
+        @media (max-width: 1024px) {
+            .hero { flex-direction: column; text-align: center; padding: 3rem 0 4rem; gap: 2.5rem; min-height: auto; }
+            .hero-content { max-width: 100%; }
+            .hero-description { max-width: 100%; margin: 0 auto 2rem; }
+            .hero-eyebrow { justify-content: center; }
+            .hero-eyebrow::before { display: none; }
+            .hero-stats-row { justify-content: center; }
+            .hero-actions { justify-content: center; }
+            .hero-emblem-wrapper { width: 250px; height: 250px; }
+            .hero-emblem { width: 120px; height: 120px; }
+        }
+        @media (max-width: 768px) {
+            .container { padding: 0 1.5rem; }
+            .nav-links { gap: 1rem; }
+            .nav-links a { font-size: 0.68rem; }
+            .hero h1 { font-size: 2.2rem; }
+            .hero-stats-row { gap: 1.8rem; }
+            .stat-number { font-size: 2rem; }
+            .stat-item:not(:last-child)::after { right: -0.9rem; }
+            .section-title { font-size: 2rem; }
+            .content-card { padding: 1.5rem; }
+            .store-table { font-size: 0.75rem; }
+            .store-table th, .store-table td { padding: 0.5rem 0.6rem; }
+            .tip-grid { grid-template-columns: 1fr; }
+            .highlight-block { padding: 1rem 1.2rem; }
+            .hero-emblem-wrapper { width: 220px; height: 220px; }
+            .hero-emblem { width: 100px; height: 100px; }
+            .btn { padding: 0.7rem 1.5rem; font-size: 0.7rem; }
+            .navbar { margin: 0 -1.5rem; padding-left: 1.5rem; padding-right: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-patchwork">
+        <div class="bg-patch bg-patch-1"></div>
+        <div class="bg-patch bg-patch-2"></div>
+        <div class="bg-patch bg-patch-3"></div>
+        <div class="bg-patch bg-patch-4"></div>
+    </div>
+    <div class="bg-grain"></div>
+
+    <div class="container">
+        <nav class="navbar">
+            <div class="logo-group">
+                <a href="index.html" class="logo-mark">肥</a>
+                <div class="logo-text">老<span>司機</span></div>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#overview">概覽</a></li>
+                <li><a href="#gogobar">GoGo Bar</a></li>
+                <li><a href="#massage">日按</a></li>
+                <li><a href="#thai-bath">泰浴</a></li>
+                <li><a href="#gentleman">高端會所</a></li>
+                <li><a href="index.html" class="nav-cta">返回首頁</a></li>
+            </ul>
+        </nav>
+
+        <section class="hero">
+            <div class="hero-content">
+                <p class="hero-eyebrow">— 主持人·老雞 —</p>
+                <h1>
+                    <em>曼谷</em>全亞洲性價比<br>最高的夜生活城市
+                </h1>
+                <p class="hero-description">
+                    GoGo Bar、<strong>泰浴</strong>、<strong>日按</strong>、蛇美咖啡、日K、Gentleman's Club
+                    — 六大玩法一次集齊。消費從 <strong>200 銖</strong> 到 <strong>33,000 銖</strong>，
+                    全亞洲性價比最高的 <strong>成人娛樂城市</strong>。
+                </p>
+                <div class="hero-stats-row">
+                    <div class="stat-item">
+                        <span class="stat-number">50+</span>
+                        <span class="stat-label">收錄店家</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">5</span>
+                        <span class="stat-label">紅燈區</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">200-33k</span>
+                        <span class="stat-label">消費區間(銖)</span>
+                    </div>
+                </div>
+                <div class="hero-actions">
+                    <a href="#gogobar" class="btn btn-primary">
+                        <span>開始探索</span> <i class="fas fa-arrow-right"></i>
+                    </a>
+                    <a href="index.html" class="btn btn-secondary">
+                        <span>返回首頁</span> <i class="fas fa-home"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="hero-emblem-wrapper">
+                    <div class="cuisine-ring"></div>
+                    <div class="cuisine-ring-2"></div>
+                    <div class="cuisine-ring-3"></div>
+                    <div class="hero-emblem">
+                        <div class="emblem-inner">
+                            <i class="fas fa-torii-gate emblem-center-icon"></i>
+                            <span class="emblem-subtitle">Bangkok</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- 概覽 -->
+    <section class="section" id="overview">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-tag">— 玩法總覽 —</p>
+                <h2 class="section-title">曼谷六大支柱</h2>
+            </div>
+            <div class="section-divider">
+                <span class="divider-line"></span>
+                <i class="fas fa-compass divider-icon"></i>
+                <span class="divider-line"></span>
+            </div>
+
+            <div class="content-card">
+                <div class="highlight-block">
+                    <p class="quote">「建議曼谷單兵作戰，機場 B1 換匯，尖峰時段騎摩托車最快，日K 一小時換一家篩選。」</p>
+                    <p style="margin-top:0.5rem;">— 老雞，《肥宅老司機》S3EP18、S3EP26</p>
+                </div>
+                <p>曼谷是全亞洲成人娛樂性價比最高的城市。消費體系透明、玩法多元，從 200 銖的平價小吃到 33,000 銖的頂級泰浴都有。以下按類型一一介紹。</p>
+            </div>
+
+            <div class="content-card">
+                <h3><i class="fas fa-layer-group"></i> 消費分級總覽</h3>
+                <table class="store-table">
+                    <thead>
+                        <tr><th>等級</th><th>場所類型</th><th>費用（銖）</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>經濟型</td><td>T-Ded99、Thaniya 日K、Danika Massage</td><td class="price">200–3,000</td></tr>
+                        <tr><td>中端</td><td>日按（Wonder/Spicy）、蛇美咖啡、標準 GoGo Bar</td><td class="price">2,500–6,000</td></tr>
+                        <tr><td>高端</td><td>泰浴（Maria/Tara）、Nana 廣場</td><td class="price">6,000–15,000</td></tr>
+                        <tr><td>奢侈</td><td>The Pimp、Black Caviar</td><td class="price">15,000–33,000+</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- GoGo Bar -->
+    <section class="section-alt" id="gogobar">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-tag">— 泰國國粹 —</p>
+                <h2 class="section-title">GoGo Bar</h2>
+            </div>
+            <div class="section-divider">
+                <span class="divider-line"></span>
+                <i class="fas fa-glass-cheers divider-icon"></i>
+                <span class="divider-line"></span>
+            </div>
+
+            <div class="content-card">
+                <div class="highlight-block">
+                    <p class="quote">「曼谷 GoGo Bar 攻略：應無視媽媽桑的催促，透過請 Lady Drink 讓服務人員主動接近。」</p>
+                    <p style="margin-top:0.5rem;">— 老濕，《肥宅老司機》S3EP26</p>
+                </div>
+
+                <h4><i class="fas fa-landmark"></i> Patpong — King's Castle 系列（KC 推薦）</h4>
+                <table class="store-table">
+                    <thead><tr><th>店名</th><th>特色</th></tr></thead>
+                    <tbody>
+                        <tr><td><strong>King's Castle 1</strong></td><td>妹子最多、舞台最大</td></tr>
+                        <tr><td><strong>King's Castle 無數字</strong></td><td>嫩妹為主</td></tr>
+                        <tr><td><strong>King's Castle 2</strong></td><td>私人包間、無低消</td></tr>
+                        <tr><td><strong>King's Castle 3</strong></td><td>新店，與 King1 共享表演</td></tr>
+                    </tbody>
+                </table>
+                <p><strong>費用</strong>：啤酒 180 銖、Lady Drink 230 銖（10 杯 2,000 銖 promotion）、ST 約 4,400 銖、LT 約 8,200 銖</p>
+                <p><strong>特色</strong>：顏值最高、妹子最嫩、假胸率最低、現場尺度大、不催酒</p>
+
+                <h4><i class="fas fa-city"></i> Nana Plaza</h4>
+                <table class="store-table">
+                    <thead><tr><th>店名</th><th>特色</th><th>提醒</th></tr></thead>
+                    <tbody>
+                        <tr><td><strong>Rainbow 4</strong></td><td>顏值最高，商務風</td><td>—</td></tr>
+                        <tr><td><strong>Rainbow 5</strong></td><td>尺度和顏值相當</td><td class="warn">⚠ 有灌單現象</td></tr>
+                        <tr><td><strong>Red Dragon</strong></td><td>PR 顏值超高，尺度最大</td><td>—</td></tr>
+                        <tr><td><strong>Rainbow Fall</strong></td><td>妹子正，台灣口味</td><td>較被動，需自己主導</td></tr>
+                        <tr><td><strong>OB Session</strong></td><td>鵝寶寶店，積極可愛</td><td>—</td></tr>
+                        <tr><td><strong>Skating</strong></td><td>—</td><td class="warn">❌ 幹部狂要錢，3,800/hr</td></tr>
+                    </tbody>
+                </table>
+                <p><strong>費用</strong>：酒水 160 起、Lady Drink 220 / 杯、ST 4,000–6,000 銖、LT 8,000–11,000 銖</p>
+
+                <h4><i class="fas fa-star"></i> 隱藏神店 — T-Ded99（BTS Saphan Khwai）</h4>
+                <table class="store-table">
+                    <thead><tr><th>項目</th><th>費用</th></tr></thead>
+                    <tbody>
+                        <tr><td>大瓶啤酒</td><td class="price">150 銖</td></tr>
+                        <tr><td>坐檯費（免 Lady Drink）</td><td class="price">300 銖/小時</td></tr>
+                        <tr><td>快餐含炮房</td><td class="price">2,500 銖</td></tr>
+                        <tr><td>包夜（免 Barfine）</td><td class="price">5,000–6,000 銖</td></tr>
+                    </tbody>
+                </table>
+                <p>妹子 150–200 位，18–28 歲，整容/假胸極少。老司機經驗談：「這麼便宜，一人點 3 個也沒花多少錢」</p>
+
+                <h4><i class="fas fa-list"></i> 其他 GoGo Bar</h4>
+                <table class="store-table">
+                    <thead><tr><th>店名</th><th>區域</th><th>特色</th></tr></thead>
+                    <tbody>
+                        <tr><td><strong>Addict</strong></td><td>Nana</td><td>空姐制服主題，門口妹子多</td></tr>
+                        <tr><td><strong>Crazy House</strong></td><td>Nana</td><td>妹子全裸，玻璃牆，適合第一站暖場</td></tr>
+                        <tr><td><strong>Caviar（魚子醬）</strong></td><td>Nana</td><td>頂級，儲值 3 萬起，VIP 房含桑拿大浴缸</td></tr>
+                        <tr><td><strong>Rumble 6</strong></td><td—</td><td>東北亞男子聚集地，品質不錯</td></tr>
+                        <tr><td><strong>Baraka</strong></td><td>Soi Cowboy</td><td>妹子正，適合一樓看風景</td></tr>
+                        <tr><td><strong>Bakala</strong></td><td>—</td><td>脫衣舞秀，800–1,500 銖</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- 日按 -->
+    <section class="section" id="massage">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-tag">— 日式按摩 —</p>
+                <h2 class="section-title">日按（Japanese Massage）</h2>
+            </div>
+            <div class="section-divider">
+                <span class="divider-line"></span>
+                <i class="fas fa-spa divider-icon"></i>
+                <span class="divider-line"></span>
+            </div>
+
+            <div class="content-card">
+                <p><strong>最佳時間</strong>：下午 5–6 點（早班未下班、晚班剛上崗） · <strong>支付</strong>：僅收現金</p>
+
+                <table class="store-table">
+                    <thead><tr><th>店名</th><th>費用</th><th>特色</th></tr></thead>
+                    <tbody>
+                        <tr><td><strong>Wonder Massage</strong></td><td class="price">2,500–5,500</td><td>20–30 位妹，環境舒適，密碼 extrasuper</td></tr>
+                        <tr><td><strong>Spicy Massage</strong></td><td class="price">1,600 起</td><td>性價比最高，最便宜雙飛 3,100</td></tr>
+                        <tr><td><strong>Psyche Dream</strong></td><td class="price">7,500</td><td>天花板級，有中文客服</td></tr>
+                        <tr><td><strong>Canary（金絲雀）</strong></td><td class="price">4,500–6,500</td><td>劇本殺主題，顏值天花板</td></tr>
+                        <tr><td><strong>Kokoro Massage</strong></td><td class="price">3,900 套餐</td><td>服務型</td></tr>
+                        <tr><td><strong>Candy Massage</strong></td><td class="price">2,800 /90分</td><td>Nuru + 冰火吹 + 塑膠懶，玩法最多元</td></tr>
+                        <tr><td><strong>nunu</strong></td><td class="price">3,800 /90分</td><td>台灣老闆娘，兩發，溝通無障礙</td></tr>
+                        <tr><td><strong>boss massage</strong></td><td class="price">2,900 /60分</td><td>台灣幹部，可刷卡不加%</td></tr>
+                        <tr><td><strong>CUBE Massage</strong></td><td class="price">3,000 /60分</td><td>韓國人開，照片選妹，全程陪聊</td></tr>
+                        <tr><td><strong>Mimi Massage</strong></td><td class="price">1,600–1,800</td><td>制服 + 情慾挑逗 30 分鐘</td></tr>
+                        <tr><td><strong>Smile</strong></td><td>—</td><td>妹子極瘦（40kg）但巨乳</td></tr>
+                        <tr><td><strong>Kawaii Massage</strong></td><td class="price">3,500 /90分</td><td>中規中矩，結帳送果凍威而鋼</td></tr>
+                        <tr><td><strong>secret kiss</strong></td><td class="price">1,300</td><td>口爆專門，最便宜</td></tr>
+                        <tr><td><strong>Sea Creek Kiss</strong></td><td class="price">2,800 /70分</td><td>口爆特化，可 Telegram 中文溝通</td></tr>
+                        <tr><td><strong>Deep Massage</strong></td><td class="price">3,000 /60分</td><td>Wonder 姊妹店，但照片與現場嚴重不符</td></tr>
+                        <tr><td><strong>Danika Massage</strong></td><td class="price">800 + 2,000</td><td>90分推油 800 + 全套 2,000，無外國遊客</td></tr>
+                        <tr><td style="color:var(--accent-crimson);"><strong>Dr. BJ Salon</strong></td><td class="warn">—</td><td class="warn">❌ 品質極差，建議進店前閉上眼睛</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- 泰浴 -->
+    <section class="section-alt" id="thai-bath">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-tag">— 傳統經典 —</p>
+                <h2 class="section-title">泰浴（Thai Bath House）</h2>
+            </div>
+            <div class="section-divider">
+                <span class="divider-line"></span>
+                <i class="fas fa-bath divider-icon"></i>
+                <span class="divider-line"></span>
+            </div>
+
+            <div class="content-card">
+                <table class="store-table">
+                    <thead><tr><th>等級</th><th>店名</th><th>費用</th></tr></thead>
+                    <tbody>
+                        <tr><td>💎 頂級</td><td><strong>Black Caviar</strong></td><td class="price">7,000–33,000 銖</td></tr>
+                        <tr><td>💎 頂級</td><td><strong>Maria Massage</strong></td><td class="price">6,000–23,000 銖</td></tr>
+                        <tr><td>💎 頂級</td><td><strong>Tara Bangkok</strong></td><td class="price">4,000–20,000 銖</td></tr>
+                        <tr><td>⚠ 低端</td><td>Little Duck / Mercy / Nancy</td><td class="price">3,000–10,000 銖（不推）</td></tr>
+                    </tbody>
+                </table>
+                <p><strong>特色</strong>：3 人以上可申請免費 VIP 多人房。可刷卡/支付寶/微信。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gentleman's Club -->
+    <section class="section" id="gentleman">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-tag">— 高端會所 —</p>
+                <h2 class="section-title">Gentleman's Club</h2>
+            </div>
+            <div class="section-divider">
+                <span class="divider-line"></span>
+                <i class="fas fa-wine-glass-alt divider-icon"></i>
+                <span class="divider-line"></span>
+            </div>
+
+            <div class="content-card">
+                <table class="store-table">
+                    <thead><tr><th>店名</th><th>低消</th><th>出台費用</th><th>特色</th></tr></thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>The Pimp</strong></td>
+                            <td>散台 5,000 / 沙發 8,000</td>
+                            <td class="price">ST 10,000–12,000 / LT 20,000</td>
+                            <td>顏值最高、服務最專業、會中英文</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Klub 25 Thonglo</strong></td>
+                            <td>與 Pimp 相當</td>
+                            <td>基本不出台</td>
+                            <td>號稱全曼谷妹最多（100–150+）</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Dubai Luxury Club</strong></td>
+                            <td>套餐 9,000 起</td>
+                            <td>基本不出台</td>
+                            <td>費用較低、顏值高、尺度大</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h4><i class="fas fa-info-circle"></i> The Pimp 詳細資訊</h4>
+                <p>坐台費：Model 3,000 銖/首小時，1,000 銖/後續，6 小時封頂</p>
+                <p>表演：週日–三 Bikini 秀，週四–六 23:30 大尺度表演</p>
+                <p>資料庫註：「門檻較高、規矩較複雜，不適合所有玩家，請量力而為」</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 蛇美咖啡 + 日K + 餐吧 -->
+    <section class="section-alt">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-tag">— 更多玩法 —</p>
+                <h2 class="section-title">蛇美 · 日K · Chill Bar</h2>
+            </div>
+            <div class="section-divider">
+                <span class="divider-line"></span>
+                <i class="fas fa-plus-circle divider-icon"></i>
+                <span class="divider-line"></span>
+            </div>
+
+            <div class="content-card">
+                <h3><i class="fas fa-mug-hot"></i> 蛇美咖啡（Thermae Coffee）</h3>
+                <table class="store-table">
+                    <thead><tr><th>項目</th><th>資訊</th></tr></thead>
+                    <tbody>
+                        <tr><td>位置</td><td>Ruamchitt Hotel 負一層（打車關鍵字「Thermae」）</td></tr>
+                        <tr><td>時間</td><td>20:00–02:00，最佳 20:30–22:30</td></tr>
+                        <tr><td>ST</td><td class="price">2,500–3,500 銖</td></tr>
+                        <tr><td>LT</td><td class="price">5,000–8,000 銖</td></tr>
+                        <tr><td>炮房</td><td class="price">500–700 銖（步行 50 米）</td></tr>
+                        <tr><td>付款</td><td>事後付款</td></tr>
+                    </tbody>
+                </table>
+                <p><strong>規則</strong>：蛇美內沒有人妖，外面站街的才是。想確認假胸可問「Are you silicon?」</p>
+                <p><strong>高階玩法</strong>：買 LT 叫妹子帶你吃飯逛夜市</p>
+
+                <h3 style="margin-top:2rem;"><i class="fas fa-microphone-alt"></i> 日K — Thaniya 一條街</h3>
+                <table class="store-table">
+                    <thead><tr><th>項目</th><th>費用</th></tr></thead>
+                    <tbody>
+                        <tr><td>酒水無限暢飲</td><td class="price">800 銖/小時</td></tr>
+                        <tr><td>Lady Drink</td><td class="price">200 銖/杯（4–5 杯/小時）</td></tr>
+                        <tr><td>Barfine</td><td class="price">1,200 銖</td></tr>
+                        <tr><td>ST</td><td class="price">3,000 銖</td></tr>
+                        <tr><td>LT</td><td class="price">4,000–5,000 銖</td></tr>
+                        <tr><td>包房</td><td class="price">500 銖</td></tr>
+                    </tbody>
+                </table>
+                <p>約 50 家日K 在同一條街，妹子坐門口任選。特色：年輕、漂亮、乖巧、很有女朋友 feel。</p>
+
+                <h3 style="margin-top:2rem;"><i class="fas fa-utensils"></i> 餐吧 — Paikanyai Bar & Restaurant</h3>
+                <p>大學生兼職，顏值號稱曼谷第一。坐台 1,200 銖/小時，包房 3,000 銖（無低消）。週四/六有大尺度表演。連續捧場 2–3 晚，包夜 6,000–1 萬銖。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 實用資訊 -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-tag">— 老司機經驗 —</p>
+                <h2 class="section-title">實用小技巧</h2>
+            </div>
+            <div class="section-divider">
+                <span class="divider-line"></span>
+                <i class="fas fa-lightbulb divider-icon"></i>
+                <span class="divider-line"></span>
+            </div>
+
+            <div class="content-card">
+                <div class="tip-grid">
+                    <div class="tip-card">
+                        <p class="tip-label">交通 <span style="color:var(--text-tertiary);font-weight:300;">· 老雞</span></p>
+                        <p>Grab 為主，尖峰時段<strong>摩托車</strong>最快</p>
+                    </div>
+                    <div class="tip-card">
+                        <p class="tip-label">換錢 <span style="color:var(--text-tertiary);font-weight:300;">· 老雞</span></p>
+                        <p>機場 B1 <strong>SuperRich</strong>，匯率優於市區</p>
+                    </div>
+                    <div class="tip-card">
+                        <p class="tip-label">住宿 <span style="color:var(--text-tertiary);font-weight:300;">· KC</span></p>
+                        <p>住<strong>澎澎站（Phrom Phong）</strong>大飯店，妹子才願意來</p>
+                    </div>
+                    <div class="tip-card">
+                        <p class="tip-label">日按最佳時間</p>
+                        <p><strong>16:00–18:00</strong> 妹子最多</p>
+                    </div>
+                    <div class="tip-card">
+                        <p class="tip-label">日洗巔峰 <span style="color:var(--text-tertiary);font-weight:300;">· 阿紅</span></p>
+                        <p>晚上 <strong>7–8 點</strong></p>
+                    </div>
+                    <div class="tip-card">
+                        <p class="tip-label">GoGo Bar 選妹 <span style="color:var(--text-tertiary);font-weight:300;">· KC</span></p>
+                        <p><strong>黑派</strong>熱情服務佳，<strong>白派</strong>顏值高但態度跩</p>
+                    </div>
+                    <div class="tip-card">
+                        <p class="tip-label">Lady Drink 陷阱 <span style="color:var(--text-tertiary);font-weight:300;">· KC</span></p>
+                        <p>進店前設預算上限，敢說<strong>不</strong>，不然半小時噴 10 杯</p>
+                    </div>
+                    <div class="tip-card">
+                        <p class="tip-label">包夜提醒</p>
+                        <p>80% 機率妹子半夜會走，沒感情基礎別第一次就包夜</p>
+                    </div>
+                    <div class="tip-card">
+                        <p class="tip-label">安全</p>
+                        <p>遠離陌生國人組隊，不單獨去沒 PR 的夜店</p>
+                    </div>
+                    <div class="tip-card">
+                        <p class="tip-label">近期趨勢 <span style="color:var(--text-tertiary);font-weight:300;">· 阿紅</span></p>
+                        <p>多家開始流行<strong>「戴套吹」</strong>，進場前確認</p>
+                    </div>
+                    <div class="tip-card">
+                        <p class="tip-label">大麻</p>
+                        <p>到實體店說 <strong>「which is for beginner」</strong>，新手勿試笑氣</p>
+                    </div>
+                    <div class="tip-card">
+                        <p class="tip-label">入境</p>
+                        <p>提前 72 小時填寫<strong>電子入境卡（TDAC）</strong></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-card" style="text-align:center; margin-top:2rem;">
+                <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.1rem;color:var(--accent-gold);">
+                    「進店後手持續黏在妹子皮膚上，增加肢體接觸才能推進關係。<br>白派顏值高但態度跩，黑派熱情實戰體驗通常更好。」
+                </p>
+                <p style="margin-top:0.8rem;color:var(--text-tertiary);font-size:0.85rem;">
+                    — KC，《肥宅老司機》S3EP151
+                </p>
+                <p style="margin-top:1.2rem;">
+                    <a href="index.html" class="btn btn-primary">
+                        <span>返回首頁</span> <i class="fas fa-home"></i>
+                    </a>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p class="footer-text">
+                © 2026 <span>肥宅老司機</span> · 由 Claude × Ollama × 波尼 偕同整理
+            </p>
+            <p class="footer-disclaimer">
+                ⚠ 本知識庫由腳本整理，絕對有錯誤，娛樂看待 🙏
+            </p>
+        </div>
+    </footer>
+</body>
+</html>
